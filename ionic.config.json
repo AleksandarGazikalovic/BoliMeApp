@@ -1,0 +1,7 @@
+{
+  "name": "BoliMeApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
