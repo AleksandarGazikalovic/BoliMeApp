@@ -46,7 +46,7 @@ const App = () => (
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
-        <Route exact path="/registracija">
+        <Route exact path="/registration">
           <Registracija />
         </Route>
       </IonRouterOutlet>

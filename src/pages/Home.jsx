@@ -85,7 +85,7 @@ const Home = () => {
         
             <br/>
             <p className="ion-text-center ">Nemaš nalog? Registruj se!</p>
-            <IonButton type="button" expand="block" routerLink="/registracija" className="ion-margin-top">Registracija
+            <IonButton type="button" expand="block" routerLink="/registration" className="ion-margin-top">Registracija
               <IonIcon icon={personCircleOutline} slot="end"></IonIcon>
             </IonButton>
            </form>
