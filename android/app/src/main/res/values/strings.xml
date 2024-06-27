@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">BoliMeApp</string>
-    <string name="title_activity_main">BoliMeApp</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">BoliMe</string>
+    <string name="title_activity_main">BoliMe</string>
+    <string name="package_name">com.bolime.app</string>
+    <string name="custom_url_scheme">com.bolime.app</string>
 </resources>
