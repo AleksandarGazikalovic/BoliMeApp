@@ -11,6 +11,7 @@ import { personCircleOutline } from "ionicons/icons"; // Import the specific ico
 import "./Registracija.css";
 import { register } from "../components/FirebaseConfig";
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 
 
@@ -29,9 +30,12 @@ const Registracija = () => {
       return;
     }
 
+    const history = useHistory();
+
     try {
       await register(email, lozinka);
       alert("Uspešno ste se registrovali!");
+      history.push("/landing-page");
     } catch (error) {
       alert(`Došlo je do greške: ${error.message}`);
     }

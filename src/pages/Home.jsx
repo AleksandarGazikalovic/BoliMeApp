@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory  } from "react-router-dom";
 import {
   IonContent,
   IonHeader,
@@ -35,13 +36,15 @@ const Home = () => {
     setButtonAnimation(false); // Disable button animation when showing card
   };
 
+  const history = useHistory();
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       await login(email, lozinka);
       alert("Uspešno ste se prijavili!");
-      // Redirect to another page or perform any other necessary actions
+      history.push('/landing-page');
     } catch (error) {
       alert(`Došlo je do greške: ${error.message}`);
     }
