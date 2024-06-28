@@ -1,8 +1,19 @@
 import { Redirect, Route } from "react-router-dom";
-import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
+import {
+  IonApp,
+  IonAvatar,
+  IonIcon,
+  IonLabel,
+  IonRouterOutlet,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  setupIonicReact,
+} from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Home from "./pages/Home";
+import { HomePage, AnalyticsPage, ProfilePage, PainPage } from "./pages";
 
+import { analyticsOutline, homeOutline, medkitOutline } from "ionicons/icons";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -38,14 +49,40 @@ setupIonicReact();
 const App = () => (
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Redirect exact path="/" to="/home" />
+          <Route path="/home" render={() => <HomePage />} exact={true} />
+          <Route path="/pain" render={() => <PainPage />} exact={true} />
+          <Route
+            path="/analytics"
+            render={() => <AnalyticsPage />}
+            exact={true}
+          />
+          <Route path="/profile" render={() => <ProfilePage />} exact={true} />
+        </IonRouterOutlet>
+
+        <IonTabBar slot="bottom">
+          <IonTabButton tab="home" href="/home">
+            <IonIcon icon={homeOutline} />
+            <IonLabel>Naslovna</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="pain" href="/pain">
+            <IonIcon icon={medkitOutline} />
+            <IonLabel>Dodaj bol</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="analytics" href="/analytics">
+            <IonIcon icon={analyticsOutline} />
+            <IonLabel>Analitika</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="profile" href="/profile">
+            <IonAvatar style={{ width: "30px", height: "30px" }}>
+              <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </IonAvatar>
+            <IonLabel>Profil</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
     </IonReactRouter>
   </IonApp>
 );
