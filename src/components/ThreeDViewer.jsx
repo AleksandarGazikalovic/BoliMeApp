@@ -6,6 +6,7 @@ import * as THREE from "three";
 
 const Model = () => {
   const modelRef = useRef();
+  const selectedObjectRef = useRef(null);
   const { scene, camera, gl } = useThree();
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
@@ -32,8 +33,19 @@ const Model = () => {
       const intersects = raycaster.intersectObjects(scene.children, true);
       if (intersects.length > 0) {
         const selectedObject = intersects[0].object;
-        console.log("Clicked object:", selectedObject.name);
+
+        if (selectedObjectRef.current) {
+          // Reset the color of the previously selected object
+          selectedObjectRef.current.material.color.set(0xffffff); // Original color
+        }
+
+        // Set the color of the newly selected object
         selectedObject.material.color.set(0xff0000);
+
+        // Update the reference to the currently selected object
+        selectedObjectRef.current = selectedObject;
+
+        console.log("Clicked object:", selectedObject.name);
       }
     };
 
@@ -56,12 +68,20 @@ const CameraControls = () => {
     gl: { domElement },
   } = useThree();
   useFrame(() => camera.updateMatrixWorld());
-  return <OrbitControls enableZoom={true} args={[camera, domElement]} />;
+
+  return (
+    <OrbitControls
+      enableZoom={true}
+      args={[camera, domElement]}
+      maxPolarAngle={Math.PI / 2} // Adjust this value to lock the x-axis rotation
+      minPolarAngle={Math.PI / 2} // Set to the same value as maxPolarAngle
+    />
+  );
 };
 
 const ThreeDViewer = () => {
   return (
-    <Canvas camera={{ position: [0, 0, 5] }}>
+    <Canvas camera={{ position: [0, 0, 70] }}>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} />
       <Model />
