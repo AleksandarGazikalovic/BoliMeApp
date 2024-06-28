@@ -34,6 +34,7 @@ import "@ionic/react/css/palettes/dark.system.css";
 /* Theme variables */
 import "./theme/variables.css";
 import LandingPage from "./pages/LandingPage";
+import CreateProfile from "./pages/CreateProfile";
 
 setupIonicReact();
 
@@ -52,6 +53,9 @@ const App = () => (
         </Route>
         <Route exact path="/landing-page">
           <LandingPage/>
+        </Route>
+        <Route exact path="/create-profile">
+          <CreateProfile/>
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
