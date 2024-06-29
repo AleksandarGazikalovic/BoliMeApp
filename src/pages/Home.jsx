@@ -22,7 +22,7 @@ import {
 import { logInOutline, personCircleOutline } from 'ionicons/icons'; // Import the specific icon
 import "./Home.css";
 import logo from "../assets/logo.png";
-import { login } from "../components/FirebaseConfig"; // Assuming firebaseConfig is the file where Firebase is configured
+import { auth, firebase, login } from "../components/FirebaseConfig"; // Assuming firebaseConfig is the file where Firebase is configured
 
 const Home = () => {
   const [showCard, setShowCard] = useState(false);
@@ -82,7 +82,7 @@ const Home = () => {
 
         <IonCard className={showCard ? "card visible" : "card"}>
           <IonCardHeader>
-            <IonCardTitle className="ion-text-center card-title">Login form</IonCardTitle>
+            <IonCardTitle className="ion-text-center card-title">Forma za prijavu</IonCardTitle>
             <IonCardSubtitle className="ion-text-center ion-padding">Pristupi svom nalogu</IonCardSubtitle>
           </IonCardHeader>
           <IonCardContent>
@@ -114,7 +114,7 @@ const Home = () => {
               <IonCheckbox labelPlacement="end">Zapamti me</IonCheckbox>
               <IonButton
                 type="button"
-                routerLink="/zaboravljena-sifra"
+                routerLink="/forgotten-password"
                 fill="clear"
                 size="small"
                 className="ion-float-end"

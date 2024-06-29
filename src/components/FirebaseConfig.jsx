@@ -1,9 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { collection, getFirestore } from "firebase/firestore";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  setPersistence, browserLocalPersistence
+
 } from "firebase/auth";
 
 const firebaseConfig = {

@@ -16,7 +16,7 @@ import { auth } from "../components/FirebaseConfig";
 
 
 const LandingPage = () => {
-    const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
     useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(user => {
@@ -29,7 +29,9 @@ const LandingPage = () => {
       return () => unsubscribe();
     }, []);
 
-    console.log("Current userId:", userId);
+    console.log("Current userId:", userId)
+ 
+
 
   return (
     <IonPage>
