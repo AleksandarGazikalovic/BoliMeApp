@@ -106,7 +106,7 @@ const Login = () => {
               <br />
               <IonInput
                 className="form-ele"
-                label="password"
+                label="Lozinka"
                 type="password"
                 placeholder="password"
                 labelPlacement="floating"
@@ -118,15 +118,15 @@ const Login = () => {
               </IonInput>
               <br />
               <IonCheckbox labelPlacement="end">Zapamti me</IonCheckbox>
-              <IonButton
+              <IonRouterLink
                 type="button"
                 routerLink="/forgotten-password"
                 fill="clear"
                 size="small"
                 className="ion-float-end"
               >
-                Zaboravljena šifra
-              </IonButton>
+                Zaboravljena lozinka
+              </IonRouterLink>
               <IonButton
                 type="submit"
                 expand="block"

@@ -1,0 +1,17 @@
+.container-duration-of-pain{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 20px;
+    
+}
+
+.number-of-time{
+    width: 85%;
+}
+
+ion-select-option{
+    width: 80%;
+}
+

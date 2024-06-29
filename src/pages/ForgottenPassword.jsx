@@ -25,7 +25,7 @@ const ForgottenPassword = () => {
       await sendPasswordResetEmail(auth, email);
       setToastMessage("Email za resetovanje sifre je poslat!");
       setShowToast(true);
-      history.push("/home")
+      history.push("/login")
     } catch (error) {
       setToastMessage(error.message);
       setShowToast(true);

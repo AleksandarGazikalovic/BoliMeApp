@@ -8,7 +8,7 @@ import {
   IonInputPasswordToggle,
 } from "@ionic/react";
 import { personCircleOutline } from "ionicons/icons";
-import "./Registracija.css";
+import "./Registration.css";
 import { register } from "../components/FirebaseConfig";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
