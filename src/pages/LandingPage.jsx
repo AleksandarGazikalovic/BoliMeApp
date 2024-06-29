@@ -27,7 +27,7 @@ const LandingPage = () => {
           setProfiles(data);
         });
       } else {
-        setUserId(null);
+        setProfiles(null);
       }
     });
     return () => unsubscribe();
