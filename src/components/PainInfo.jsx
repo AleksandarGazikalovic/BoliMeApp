@@ -75,7 +75,11 @@ const PainInfo = () => {
                 <IonIcon slot="start" icon={happyOutline}></IonIcon>
                 <IonIcon slot="end" icon={sadOutline}></IonIcon>
           </IonRange>
-
+          <br />
+          <IonLabel position="stacked">
+            Označite tip bola :
+          </IonLabel>
+          <br />
           <IonSelect label="Tip bola" placeholder="Tip bola" onIonChange={handleSelection}>
             <IonSelectOption value="ostar">Oštar bol <span className="ion-padding-right">&#x2139;</span></IonSelectOption>
             <IonSelectOption value="tup">Tup bol <span className="ion-padding-right">&#x2139;</span></IonSelectOption>
@@ -89,6 +93,10 @@ const PainInfo = () => {
           </IonSelect>
           <br />
 
+          <IonLabel position="stacked">
+            Označite datum početka :
+          </IonLabel>
+          <br />
           {selectedOption && (
         <IonNote>{descriptions[selectedOption]}</IonNote>
           )}
@@ -100,6 +108,10 @@ const PainInfo = () => {
             labelPlacement="floating"
             fill="outline"
           />
+          <br />
+          <IonLabel position="stacked">
+            Označite trajanje bola :
+          </IonLabel>
           <div className="container-duration-of-pain ">
             <IonInput
               label="Trajanje bola"
@@ -119,6 +131,7 @@ const PainInfo = () => {
           </div>
 
           <br />
+         
           <IonLabel position="stacked">
             Uticaj na kvalitet života (skala od 1 do 10) :
           </IonLabel>
@@ -139,7 +152,11 @@ const PainInfo = () => {
              <IonIcon slot="end" icon={sadOutline}></IonIcon>
           </IonRange>
           <br />
-
+            
+          <IonLabel position="stacked">
+            Označite uzrok bola :
+          </IonLabel>
+          <br />
           <div className="container-duration-of-pain ">
             <IonInput
               label="Uzrok bola"
@@ -163,7 +180,7 @@ const PainInfo = () => {
 
           <br />
           <IonLabel className="ion-margin-top">
-            Da li koristiš neki lek
+            Da li koristiš neki lek:
           </IonLabel>
           <br />
           <div className="ion-margin-top">
