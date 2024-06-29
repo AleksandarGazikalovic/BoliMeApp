@@ -11,6 +11,7 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
+
 import {
   AnalyticsPage,
   ProfilePage,
@@ -18,6 +19,7 @@ import {
   LoginPage,
   RegistrationPage,
 } from "./pages";
+
 
 import { analyticsOutline, homeOutline, medkitOutline } from "ionicons/icons";
 /* Core CSS required for Ionic components to work properly */
