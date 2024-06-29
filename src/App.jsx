@@ -11,7 +11,15 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { HomePage, AnalyticsPage, ProfilePage, PainPage } from "./pages";
+
+import {
+  AnalyticsPage,
+  ProfilePage,
+  PainPage,
+  LoginPage,
+  RegistrationPage,
+} from "./pages";
+
 
 import { analyticsOutline, homeOutline, medkitOutline } from "ionicons/icons";
 /* Core CSS required for Ionic components to work properly */
@@ -43,6 +51,9 @@ import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import LandingPage from "./pages/LandingPage";
+import CreateProfile from "./pages/CreateProfile";
+import ForgottenPassword from "./pages/ForgottenPassword";
 
 setupIonicReact();
 
@@ -51,8 +62,28 @@ const App = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Redirect exact path="/" to="/home" />
-          <Route path="/home" render={() => <HomePage />} exact={true} />
+          <Redirect exact path="/" to="/login" />
+          <Route
+            path="/registration"
+            render={() => <RegistrationPage />}
+            exact={true}
+          />
+          <Route path="/login" render={() => <LoginPage />} exact={true} />
+          <Route
+            path="/forgotten-password"
+            render={() => <ForgottenPassword />}
+            exact={true}
+          />
+          <Route
+            path="/landing-page"
+            render={() => <LandingPage />}
+            exact={true}
+          />
+          <Route
+            path="/create-profile"
+            render={() => <CreateProfile />}
+            exact={true}
+          />
           <Route path="/pain" render={() => <PainPage />} exact={true} />
           <Route
             path="/analytics"
@@ -63,10 +94,6 @@ const App = () => (
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Naslovna</IonLabel>
-          </IonTabButton>
           <IonTabButton tab="pain" href="/pain">
             <IonIcon icon={medkitOutline} />
             <IonLabel>Dodaj bol</IonLabel>
