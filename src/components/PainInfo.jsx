@@ -12,6 +12,7 @@ import {
   IonRadio,
   IonNote,
   IonIcon,
+  IonTextarea,
 
 } from "@ionic/react";
 import "./PainInfo.css";
@@ -201,13 +202,16 @@ const PainInfo = () => {
                 <IonSelectOption value="kap">Kapi</IonSelectOption>
 
               </IonSelect>
+
             </div>
             
           </div>
         </div>
       )}
     </div>
-
+    <br/>
+    <IonTextarea label="Komentar" labelPlacement="floating" placeholder="Vaš komentar" fill="outline" maxlength={300} autoGrow={true}></IonTextarea>
+        
           <div className="button-container">
             <IonButton>Dodaj bol</IonButton>
           </div>
