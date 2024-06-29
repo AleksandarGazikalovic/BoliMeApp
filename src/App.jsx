@@ -11,9 +11,13 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import Home from "./pages/Home";
-import Registracija from "./pages/Registracija";
-import { HomePage, AnalyticsPage, ProfilePage, PainPage } from "./pages";
+import {
+  AnalyticsPage,
+  ProfilePage,
+  PainPage,
+  LoginPage,
+  RegistrationPage,
+} from "./pages";
 
 import { analyticsOutline, homeOutline, medkitOutline } from "ionicons/icons";
 /* Core CSS required for Ionic components to work properly */
@@ -56,18 +60,16 @@ const App = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Redirect exact path="/" to="/home" />
-          <Route path="/home" render={() => <HomePage />} exact={true} />
-          <Route path="/pain" render={() => <PainPage />} exact={true} />
-          <Route
-            path="/analytics"
-            render={() => <AnalyticsPage />}
-            exact={true}
-          />
-          <Route path="/profile" render={() => <ProfilePage />} exact={true} />
+          <Redirect exact path="/" to="/login" />
           <Route
             path="/registration"
-            render={() => <Registracija />}
+            render={() => <RegistrationPage />}
+            exact={true}
+          />
+          <Route path="/login" render={() => <LoginPage />} exact={true} />
+          <Route
+            path="/forgotten-password"
+            render={() => <ForgottenPassword />}
             exact={true}
           />
           <Route
@@ -80,18 +82,16 @@ const App = () => (
             render={() => <CreateProfile />}
             exact={true}
           />
+          <Route path="/pain" render={() => <PainPage />} exact={true} />
           <Route
-            path="/forgotten-password"
-            render={() => <ForgottenPassword />}
+            path="/analytics"
+            render={() => <AnalyticsPage />}
             exact={true}
           />
+          <Route path="/profile" render={() => <ProfilePage />} exact={true} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={homeOutline} />
-            <IonLabel>Naslovna</IonLabel>
-          </IonTabButton>
           <IonTabButton tab="pain" href="/pain">
             <IonIcon icon={medkitOutline} />
             <IonLabel>Dodaj bol</IonLabel>

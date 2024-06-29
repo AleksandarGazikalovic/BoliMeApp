@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory  } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   IonContent,
   IonHeader,
@@ -17,17 +17,16 @@ import {
   IonCheckbox,
   IonInputPasswordToggle,
   IonRouterLink,
-
 } from "@ionic/react";
-import { logInOutline, personCircleOutline } from 'ionicons/icons'; // Import the specific icon
-import "./Home.css";
+import { logInOutline, personCircleOutline } from "ionicons/icons"; // Import the specific icon
+import "./Login.css";
 import logo from "../assets/logo.png";
 import { auth, firebase, login } from "../components/FirebaseConfig"; // Assuming firebaseConfig is the file where Firebase is configured
 
-const Home = () => {
+const Login = () => {
   const [showCard, setShowCard] = useState(false);
   const [email, setEmail] = useState("");
-  const [lozinka, setLozinka] = useState("");
+  const [password, setPassword] = useState("");
 
   const [buttonAnimation, setButtonAnimation] = useState(true); // State to manage button animation
 
@@ -42,9 +41,9 @@ const Home = () => {
     e.preventDefault();
 
     try {
-      await login(email, lozinka);
+      await login(email, password);
       alert("Uspešno ste se prijavili!");
-      history.push('/landing-page');
+      history.push("/landing-page");
     } catch (error) {
       alert(`Došlo je do greške: ${error.message}`);
     }
@@ -82,11 +81,18 @@ const Home = () => {
 
         <IonCard className={showCard ? "card visible" : "card"}>
           <IonCardHeader>
-            <IonCardTitle className="ion-text-center card-title">Forma za prijavu</IonCardTitle>
-            <IonCardSubtitle className="ion-text-center ion-padding">Pristupi svom nalogu</IonCardSubtitle>
+            <IonCardTitle className="ion-text-center card-title">
+              Forma za prijavu
+            </IonCardTitle>
+            <IonCardSubtitle className="ion-text-center ion-padding">
+              Pristupi svom nalogu
+            </IonCardSubtitle>
           </IonCardHeader>
           <IonCardContent>
-            <form className="ion-justify-content-center ion-margin" onSubmit={handleLogin}>
+            <form
+              className="ion-justify-content-center ion-margin"
+              onSubmit={handleLogin}
+            >
               <IonInput
                 className="form-ele"
                 label="Email"
@@ -100,13 +106,13 @@ const Home = () => {
               <br />
               <IonInput
                 className="form-ele"
-                label="Lozinka"
+                label="password"
                 type="password"
-                placeholder="lozinka"
+                placeholder="password"
                 labelPlacement="floating"
                 fill="outline"
-                value={lozinka}
-                onIonChange={(e) => setLozinka(e.detail.value)}
+                value={password}
+                onIonChange={(e) => setPassword(e.detail.value)}
               >
                 <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
               </IonInput>
@@ -121,24 +127,29 @@ const Home = () => {
               >
                 Zaboravljena šifra
               </IonButton>
-              <IonButton type="submit" expand="block" className="ion-margin-top">
+              <IonButton
+                type="submit"
+                expand="block"
+                className="ion-margin-top"
+              >
                 Prijavi me
                 <IonIcon icon={logInOutline} slot="end"></IonIcon>
               </IonButton>
               <br />
               <p className="ion-text-center ion-margin">
-            Nemaš nalog? 
-            <IonRouterLink
-            routerLink="/registration"
-            className="ion-margin-top"
-            style={{ textDecoration: 'underline', color: 'blue', cursor: 'pointer' }}
-            >
-             Registruj se!
-            </IonRouterLink>
-            </p>
-            
-              
-             
+                Nemaš nalog?
+                <IonRouterLink
+                  routerLink="/registration"
+                  className="ion-margin-top"
+                  style={{
+                    textDecoration: "underline",
+                    color: "blue",
+                    cursor: "pointer",
+                  }}
+                >
+                  Registruj se!
+                </IonRouterLink>
+              </p>
             </form>
           </IonCardContent>
         </IonCard>
@@ -147,4 +158,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Login;

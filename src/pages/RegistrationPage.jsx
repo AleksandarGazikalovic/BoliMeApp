@@ -13,14 +13,14 @@ import { register } from "../components/FirebaseConfig";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 
-const Registracija = () => {
+const RegistrationPage = () => {
   const [ime, setIme] = useState("");
   const [prezime, setPrezime] = useState("");
   const [datumRodjenja, setDatumRodjenja] = useState("");
   const [email, setEmail] = useState("");
   const [lozinka, setLozinka] = useState("");
   const [potvrdiLozinku, setPotvrdiLozinku] = useState("");
-  
+
   const history = useHistory();
 
   const handleRegister = async (e) => {
@@ -126,4 +126,4 @@ const Registracija = () => {
   );
 };
 
-export default Registracija;
+export default RegistrationPage;
