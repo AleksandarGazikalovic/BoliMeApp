@@ -14,8 +14,8 @@ import {
   IonButtons,
   IonMenuButton,
   IonImg,
+  IonLoading,
 } from "@ionic/react";
-import logo from "../assets/logo.png";
 import "./LandingPage.css";
 import { auth } from "../components/FirebaseConfig";
 import { profileService } from "./../services";
@@ -25,16 +25,24 @@ import { useHistory } from "react-router";
 
 const LandingPage = () => {
   const [profiles, setProfiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        profileService.getProfilesByUserId(user.uid).then((data) => {
-          setProfiles(data);
-        });
+        profileService
+          .getProfilesByUserId(user.uid)
+          .then((data) => {
+            setProfiles(data);
+            setIsLoading(false); // Move this inside the then block
+          })
+          .catch((error) => {
+            setIsLoading(false); // Handle error state
+          });
       } else {
-        setProfiles(null);
+        setProfiles([]);
+        setIsLoading(false);
       }
     });
     return () => unsubscribe();
@@ -59,6 +67,10 @@ const LandingPage = () => {
       <DefaultAvatar name={name} text={name} />
     );
   };
+
+  if (isLoading) {
+    return <IonLoading isOpen={isLoading} spinner={"circles"} />;
+  }
 
   return (
     <>
