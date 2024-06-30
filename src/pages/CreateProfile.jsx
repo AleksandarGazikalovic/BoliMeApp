@@ -54,6 +54,7 @@ const CreateProfile = () => {
         age: "",
         dateOfBirth: "",
         sex: "",
+        child: "",
       });
     } catch (error) {
       console.error("Error adding document: ", error);
@@ -143,6 +144,26 @@ const CreateProfile = () => {
               <br />
             </IonRadioGroup>
           </div>
+          <div>
+            <h4>Da li je profil za dete</h4>
+            <IonRadioGroup
+              value={profileData.child}
+              onIonChange={(e) =>
+                setProfileData({ ...profileData, child: e.detail.value })
+              }
+            >
+              <IonRadio value="yes" labelPlacement="end" name="child">
+                Da
+              </IonRadio>
+              <br />
+              <IonRadio value="no" labelPlacement="end" name="child">
+                Ne
+              </IonRadio>
+              <br />
+            </IonRadioGroup>
+          </div>
+
+
           <br />
           <IonButton
             type="submit"
