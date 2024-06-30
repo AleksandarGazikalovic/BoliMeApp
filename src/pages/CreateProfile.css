@@ -1,15 +1,24 @@
-.reg-title{
-    font-weight: bold;
+.reg-title {
+  font-weight: bold;
 }
 
-h4{
-    color: #0054e9;
+h4 {
+  color: #0054e9;
 }
 
-ion-checkbox{
-        color: #0054e9;
+ion-checkbox {
+  color: #0054e9;
 }
 
-ion-input{
-    color: #0054e9;
+ion-input {
+  color: #0054e9;
+}
+.input-error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.error-messages {
+  color: red;
+  margin-top: 10px;
 }
