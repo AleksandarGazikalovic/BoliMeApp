@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonContent,
   IonPage,
@@ -11,50 +11,50 @@ import {
 } from "@ionic/react";
 import "./CreateProfile.css";
 import { personAddOutline } from "ionicons/icons";
-import { firestore, auth } from "../components/FirebaseConfig";
-import { collection, setDoc } from "firebase/firestore"; 
+import { auth } from "../components/FirebaseConfig";
+import { profileService } from "../services";
 
 const CreateProfile = () => {
-  const [ime, setIme] = useState("");
-  const [prezime, setPrezime] = useState("");
-  const [godine, setGodine] = useState("");
-  const [datumRodjenja, setDatumRodjenja] = useState("");
-  const [pol, setPol] = useState(""); // This could be "M" or "Z", based on selection
+  const [profileData, setProfileData] = useState({
+    name: "",
+    surname: "",
+    age: "",
+    dateOfBirth: "",
+    sex: "",
+  });
+  const [userId, setUserId] = useState(null);
 
-  
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserId(user.uid);
+      } else {
+        setUserId(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  console.log(profileData);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Ensure userId is available (you should have userId set in state, retrieved from Firebase Auth)
-    const userId = auth.currentUser.uid;
-    console.log(userId);
-
-    // Prepare profile data to be saved in Firestore
-    const profileData = {
-      ime,
-      prezime,
-      godine,
-      datumRodjenja,
-      pol,
-      userId,
-    };
-
     try {
       // Add a new document with a generated id to "profiles" collection
-      const docRef = await addDoc(collection(), {
-        profileData
-      });
-      console.log("Document written with ID: ", docRef.id);
-      
+      const docRefId = profileService.createProfile(userId, profileData);
+      console.log("Document written with ID: ", docRefId);
+
       // Optionally: Navigate user to another page after profile creation
       // history.push("/profile-list");
-      
+
       // Clear form fields after submission
-      setIme("");
-      setPrezime("");
-      setGodine("");
-      setDatumRodjenja("");
-      setPol("");
+      setProfileData({
+        name: "",
+        surname: "",
+        age: "",
+        dateOfBirth: "",
+        sex: "",
+      });
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -78,8 +78,10 @@ const CreateProfile = () => {
             placeholder="Marko"
             labelPlacement="floating"
             fill="outline"
-            value={ime}
-            onIonChange={(e) => setIme(e.detail.value)}
+            value={profileData.name}
+            onIonChange={(e) =>
+              setProfileData({ ...profileData, name: e.detail.value })
+            }
           ></IonInput>
           <IonInput
             className="ion-margin-bottom"
@@ -88,8 +90,10 @@ const CreateProfile = () => {
             placeholder="Marković"
             labelPlacement="floating"
             fill="outline"
-            value={prezime}
-            onIonChange={(e) => setPrezime(e.detail.value)}
+            value={profileData.surname}
+            onIonChange={(e) =>
+              setProfileData({ ...profileData, surname: e.detail.value })
+            }
           ></IonInput>
 
           <IonInput
@@ -99,8 +103,10 @@ const CreateProfile = () => {
             placeholder="23"
             labelPlacement="floating"
             fill="outline"
-            value={godine}
-            onIonChange={(e) => setGodine(e.detail.value)}
+            value={profileData.age}
+            onIonInput={(e) =>
+              setProfileData({ ...profileData, age: e.detail.value })
+            }
           ></IonInput>
 
           <IonInput
@@ -110,18 +116,32 @@ const CreateProfile = () => {
             placeholder="dd/mm/yyyy"
             labelPlacement="floating"
             fill="outline"
-            value={datumRodjenja}
-            onIonChange={(e) => setDatumRodjenja(e.detail.value)}
+            value={profileData.dateOfBirth}
+            onIonChange={(e) =>
+              setProfileData({
+                ...profileData,
+                dateOfBirth: e.detail.value,
+              })
+            }
           ></IonInput>
 
           <div>
             <h4>Pol</h4>
-            <IonRadioGroup value="pol">
-      <IonRadio value="musko" labelPlacement="end">Muski</IonRadio>
-      <br />
-      <IonRadio value="zensko" labelPlacement="end">Zenski</IonRadio>
-      <br />
-         </IonRadioGroup>
+            <IonRadioGroup
+              value={profileData.sex}
+              onIonChange={(e) =>
+                setProfileData({ ...profileData, sex: e.detail.value })
+              }
+            >
+              <IonRadio value="male" labelPlacement="end" name="sex">
+                Muski
+              </IonRadio>
+              <br />
+              <IonRadio value="female" labelPlacement="end" name="sex">
+                Zenski
+              </IonRadio>
+              <br />
+            </IonRadioGroup>
           </div>
           <br />
           <IonButton

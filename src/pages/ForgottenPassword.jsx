@@ -19,13 +19,12 @@ const ForgottenPassword = () => {
 
   const history = useHistory();
 
-
   const handlePasswordReset = async () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setToastMessage("Email za resetovanje sifre je poslat!");
       setShowToast(true);
-      history.push("/login")
+      history.push("/login");
     } catch (error) {
       setToastMessage(error.message);
       setShowToast(true);

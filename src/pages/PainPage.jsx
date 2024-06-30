@@ -3,18 +3,16 @@ import {
   IonContent,
   IonHeader,
   IonLabel,
-  IonMenu,
   IonMenuButton,
   IonPage,
   IonSegment,
   IonSegmentButton,
-  IonText,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 import Menu from "../components/Menu";
 import { TwoDModel, PainInfo } from "../components/";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const PainPage = () => {
   const [activeSegment, setActiveSegment] = useState("place");

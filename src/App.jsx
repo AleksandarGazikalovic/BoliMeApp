@@ -1,3 +1,4 @@
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
@@ -20,8 +21,7 @@ import {
   RegistrationPage,
 } from "./pages";
 
-
-import { analyticsOutline, homeOutline, medkitOutline } from "ionicons/icons";
+import { analyticsOutline, medkitOutline } from "ionicons/icons";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -60,56 +60,62 @@ setupIonicReact();
 const App = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Redirect exact path="/" to="/login" />
-          <Route
-            path="/registration"
-            render={() => <RegistrationPage />}
-            exact={true}
-          />
-          <Route path="/login" render={() => <LoginPage />} exact={true} />
-          <Route
-            path="/forgotten-password"
-            render={() => <ForgottenPassword />}
-            exact={true}
-          />
-          <Route
-            path="/landing-page"
-            render={() => <LandingPage />}
-            exact={true}
-          />
-          <Route
-            path="/create-profile"
-            render={() => <CreateProfile />}
-            exact={true}
-          />
-          <Route path="/pain" render={() => <PainPage />} exact={true} />
-          <Route
-            path="/analytics"
-            render={() => <AnalyticsPage />}
-            exact={true}
-          />
-          <Route path="/profile" render={() => <ProfilePage />} exact={true} />
-        </IonRouterOutlet>
+      <IonRouterOutlet>
+        <Redirect exact path="/" to="/login" />
+        <Route
+          path="/registration"
+          render={() => <RegistrationPage />}
+          exact={true}
+        />
+        <Route path="/login" render={() => <LoginPage />} exact={true} />
+        <Route
+          path="/forgotten-password"
+          render={() => <ForgottenPassword />}
+          exact={true}
+        />
+        <Route
+          path="/landing-page"
+          render={() => <LandingPage />}
+          exact={true}
+        />
+        <Route
+          path="/create-profile"
+          render={() => <CreateProfile />}
+          exact={true}
+        />
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/pain" render={() => <PainPage />} exact={true} />
+            <Route
+              path="/analytics"
+              render={() => <AnalyticsPage />}
+              exact={true}
+            />
+            <Route
+              path="/profile"
+              render={() => <ProfilePage />}
+              exact={true}
+            />
+          </IonRouterOutlet>
 
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="pain" href="/pain">
-            <IonIcon icon={medkitOutline} />
-            <IonLabel>Dodaj bol</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="analytics" href="/analytics">
-            <IonIcon icon={analyticsOutline} />
-            <IonLabel>Analitika</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="profile" href="/profile">
-            <IonAvatar style={{ width: "30px", height: "30px" }}>
-              <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-            </IonAvatar>
-            <IonLabel>Profil</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="pain" href="/pain">
+              <IonIcon icon={medkitOutline} />
+              <IonLabel>Dodaj bol</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="analytics" href="/analytics">
+              <IonIcon icon={analyticsOutline} />
+              <IonLabel>Analitika</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="profile" href="/profile">
+              <IonAvatar style={{ width: "30px", height: "30px" }}>
+                <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </IonAvatar>
+              <IonLabel>Profil</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
 );

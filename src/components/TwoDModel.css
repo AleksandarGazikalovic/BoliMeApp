@@ -1,0 +1,7 @@
+.spin {
+  transition: transform 0.5s ease-in-out;
+}
+
+.primary-color {
+  color: var(--ion-color-primary);
+}

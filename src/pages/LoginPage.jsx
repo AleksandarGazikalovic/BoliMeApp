@@ -106,7 +106,7 @@ const Login = () => {
               <br />
               <IonInput
                 className="form-ele"
-                label="Lozinka"
+                label="password"
                 type="password"
                 placeholder="password"
                 labelPlacement="floating"
