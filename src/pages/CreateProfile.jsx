@@ -10,6 +10,10 @@ import {
   IonRadioGroup,
   IonLabel,
   IonText,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonBackButton,
 } from "@ionic/react";
 import "./CreateProfile.css";
 import { personAddOutline } from "ionicons/icons";
@@ -52,14 +56,20 @@ const CreateProfile = () => {
 
   return (
     <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/landing-page" />
+          </IonButtons>
+          <IonTitle
+            className="ion-text-center ion-text-lg reg-title"
+            color={"primary"}
+          >
+            Kreiranje profila
+          </IonTitle>
+        </IonToolbar>
+      </IonHeader>
       <IonContent fullscreen className="ion-padding" color="light">
-        <IonTitle
-          className="ion-text-center ion-text-lg reg-title"
-          color={"primary"}
-        >
-          Kreiranje profila
-        </IonTitle>
-
         <Formik
           initialValues={{
             firstname: "",
