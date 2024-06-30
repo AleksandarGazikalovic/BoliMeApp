@@ -17,16 +17,17 @@ import {
   IonCheckbox,
   IonInputPasswordToggle,
   IonRouterLink,
+  IonText,
 } from "@ionic/react";
 import { logInOutline, personCircleOutline } from "ionicons/icons"; // Import the specific icon
 import "./Login.css";
 import logo from "../assets/logo.png";
 import { auth, firebase, login } from "../components/FirebaseConfig"; // Assuming firebaseConfig is the file where Firebase is configured
+import { Field, Form, Formik } from "formik";
+import { LoginSchema } from "../validation/loginValidation";
 
 const Login = () => {
   const [showCard, setShowCard] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const [buttonAnimation, setButtonAnimation] = useState(true); // State to manage button animation
 
@@ -37,15 +38,14 @@ const Login = () => {
 
   const history = useHistory();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
+  const handleLogin = async (values, { setSubmitting }) => {
     try {
-      await login(email, password);
-      alert("Uspešno ste se prijavili!");
-      history.push("/landing-page");
+      await login(values.email, values.password);
+      history.push("/pain");
     } catch (error) {
-      alert(`Došlo je do greške: ${error.message}`);
+      console.error("Error logging in: ", error);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -89,68 +89,95 @@ const Login = () => {
             </IonCardSubtitle>
           </IonCardHeader>
           <IonCardContent>
-            <form
+            <Formik
+              initialValues={{ email: "", password: "" }}
               className="ion-justify-content-center ion-margin"
               onSubmit={handleLogin}
+              validationSchema={LoginSchema}
             >
-              <IonInput
-                className="form-ele"
-                label="Email"
-                type="email"
-                placeholder="email@gmail.com"
-                labelPlacement="floating"
-                fill="outline"
-                value={email}
-                onIonChange={(e) => setEmail(e.detail.value)}
-              ></IonInput>
-              <br />
-              <IonInput
-                className="form-ele"
-                label="password"
-                type="password"
-                placeholder="password"
-                labelPlacement="floating"
-                fill="outline"
-                value={password}
-                onIonChange={(e) => setPassword(e.detail.value)}
-              >
-                <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-              </IonInput>
-              <br />
-              <IonCheckbox labelPlacement="end">Zapamti me</IonCheckbox>
-              <IonRouterLink
-                type="button"
-                routerLink="/forgotten-password"
-                fill="clear"
-                size="small"
-                className="ion-float-end"
-              >
-                Zaboravljena lozinka
-              </IonRouterLink>
-              <IonButton
-                type="submit"
-                expand="block"
-                className="ion-margin-top"
-              >
-                Prijavi me
-                <IonIcon icon={logInOutline} slot="end"></IonIcon>
-              </IonButton>
-              <br />
-              <p className="ion-text-center ion-margin">
-                Nemaš nalog?
-                <IonRouterLink
-                  routerLink="/registration"
-                  className="ion-margin-top"
-                  style={{
-                    textDecoration: "underline",
-                    color: "blue",
-                    cursor: "pointer",
-                  }}
-                >
-                  Registruj se!
-                </IonRouterLink>
-              </p>
-            </form>
+              {({ handleChange, handleBlur, values, errors, touched }) => (
+                <Form>
+                  <Field
+                    as={IonInput}
+                    className={`${
+                      touched.email && errors.email ? "input-error" : ""
+                    }`}
+                    label="Email"
+                    type="email"
+                    name="email"
+                    placeholder="email@gmail.com"
+                    labelPlacement="floating"
+                    fill="outline"
+                    value={values.email}
+                    onIonChange={handleChange}
+                    onIonBlur={handleBlur}
+                  ></Field>
+                  {errors.email && touched.email ? (
+                    <>
+                      <IonText color="danger">{errors.email}</IonText>
+                      <br />
+                    </>
+                  ) : null}
+                  <br />
+                  <Field
+                    as={IonInput}
+                    className={`${
+                      touched.password && errors.password ? "input-error" : ""
+                    }`}
+                    label="password"
+                    type="password"
+                    placeholder="password"
+                    labelPlacement="floating"
+                    fill="outline"
+                    value={values.password}
+                    onIonChange={handleChange}
+                    onIonBlur={handleBlur}
+                  >
+                    <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+                  </Field>
+                  {errors.password && touched.password ? (
+                    <>
+                      <IonText color="danger">{errors.password}</IonText>
+                      <br />
+                    </>
+                  ) : null}
+                  <br />
+                  <IonCheckbox labelPlacement="end">Zapamti me</IonCheckbox>
+                  <IonRouterLink
+                    type="button"
+                    routerLink="/forgotten-password"
+                    fill="clear"
+                    size="small"
+                    className="ion-float-end"
+                  >
+                    Zaboravljena lozinka
+                  </IonRouterLink>
+                  <IonButton
+                    type="submit"
+                    expand="block"
+                    className="ion-margin-top"
+                  >
+                    Prijavi me
+                    <IonIcon icon={logInOutline} slot="end"></IonIcon>
+                  </IonButton>
+                  <br />
+                  <p className="ion-text-center ion-margin">
+                    Nemaš nalog?{" "}
+                    <IonRouterLink
+                      routerLink="/registration"
+                      className="ion-margin-top"
+                      style={{
+                        textDecoration: "underline",
+                        color: "blue",
+                        cursor: "pointer",
+                      }}
+                    >
+                      Registruj se!
+                    </IonRouterLink>
+                  </p>
+                </Form>
+              )}
+            </Formik>
           </IonCardContent>
         </IonCard>
       </IonContent>

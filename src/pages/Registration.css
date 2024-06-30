@@ -1,15 +1,21 @@
-
-
-.reg-title{
-    font-weight: bold;
+.reg-title {
+  font-weight: bold;
 }
 
-.subtitle{
-    text-align: center;
+.subtitle {
+  text-align: center;
 }
 
+ion-input {
+  color: #0054e9;
+}
 
+.input-error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
 
-ion-input{
-color: #0054e9;
+.error-messages {
+  color: red;
+  margin-top: 10px;
 }
