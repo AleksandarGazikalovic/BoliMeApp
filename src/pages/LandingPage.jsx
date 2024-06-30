@@ -2,23 +2,30 @@ import React, { useState, useEffect } from "react";
 import {
   IonContent,
   IonPage,
-  IonButton,
   IonToolbar,
   IonHeader,
   IonTitle,
-  IonIcon,
-  IonList,
-  IonItem,
-  IonLabel,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonAvatar,
+  IonRippleEffect,
+  IonRouterLink,
+  IonButtons,
+  IonMenuButton,
+  IonImg,
 } from "@ionic/react";
 import logo from "../assets/logo.png";
 import "./LandingPage.css";
-import { addOutline } from "ionicons/icons";
 import { auth } from "../components/FirebaseConfig";
 import { profileService } from "./../services";
+import { Menu } from "../components";
+import { DefaultAvatar } from "../components/";
+import { useHistory } from "react-router";
 
 const LandingPage = () => {
   const [profiles, setProfiles] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -33,55 +40,71 @@ const LandingPage = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleProfileSelect = (profileId) => {
+    console.log(`Selected profile ID: ${profileId}`);
+    history.push(`/pain`);
+    // Add logic to handle profile selection, e.g., navigating to a different page or setting a state
+  };
+
+  const renderAvatar = (avatar, name) => {
+    return avatar ? (
+      <IonAvatar
+        className="profile-avatar ion-activatable"
+        style={{ cursor: "pointer" }}
+      >
+        <IonImg src={avatar} alt={name} />
+        <IonRippleEffect></IonRippleEffect>
+      </IonAvatar>
+    ) : (
+      <DefaultAvatar name={name} text={name} />
+    );
+  };
+
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar className="ion-toolbar">
-          <div className="header">
-            <div className="logo-side">
-              <img src={logo} alt="Logo" className="logo" />
-              <h1 className="logo-h1">Boli me</h1>
-            </div>
-
-            <div className="button-side">
-              <IonButton size="medium" fill="solid" color="primary">
-                Izmeni profile
-              </IonButton>
-            </div>
-          </div>
-        </IonToolbar>
-      </IonHeader>
-
-      <IonContent fullscreen color="light">
-        <IonTitle
-          className="ion-padding ion-text-center ioTitle"
-          color={"primary"}
-        >
-          Koga boli?
-        </IonTitle>
-        <br />
-        <br />
-        <IonList>
-          {profiles.map((profile) => (
-            <IonItem key={profile.id}>
-              <IonLabel>
-                <h2>
-                  {profile.name} {profile.surname}
-                </h2>
-              </IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
-        <div className="avatar-conatiner">
-          <div className="add-profile">
-            <IonButton size="large" routerLink="/create-profile">
-              <IonIcon slot="icon-only" md={addOutline}></IonIcon>
-            </IonButton>
-            <h3 className="dodaj-h3">Dodaj novi profil</h3>
-          </div>
-        </div>
-      </IonContent>
-    </IonPage>
+    <>
+      <Menu />
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Boli me</IonTitle>
+            <IonButtons slot="end">
+              <IonMenuButton />
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent fullscreen color="light">
+          <IonTitle
+            className="ion-padding ion-text-center ioTitle"
+            color={"primary"}
+          >
+            Koga boli?
+          </IonTitle>
+          <br />
+          <br />
+          <IonGrid>
+            <IonRow>
+              {profiles?.map((profile) => (
+                <IonCol key={profile.id} size="6" sizeMd="3">
+                  <div
+                    className="profile-card"
+                    onClick={() => handleProfileSelect(profile.id)}
+                  >
+                    {renderAvatar(profile.avatar, profile.name)}
+                  </div>
+                </IonCol>
+              ))}
+              <IonCol size="6" sizeMd="3" routerLink="create-profile">
+                <div className="profile-card">
+                  <IonRouterLink routerLink="/create-profile">
+                    <DefaultAvatar name="+" text="Dodaj profil" />
+                  </IonRouterLink>
+                </div>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+        </IonContent>
+      </IonPage>
+    </>
   );
 };
 

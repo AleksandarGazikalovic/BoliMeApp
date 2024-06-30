@@ -11,8 +11,7 @@ import {
 } from "@ionic/react";
 import "./CreateProfile.css";
 import { personAddOutline } from "ionicons/icons";
-import { firestore, auth } from "../components/FirebaseConfig";
-import { collection, setDoc } from "firebase/firestore";
+import { auth } from "../components/FirebaseConfig";
 import { profileService } from "../services";
 
 const CreateProfile = () => {
