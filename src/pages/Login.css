@@ -90,3 +90,13 @@
 .form-ele {
   justify-self: center;
 }
+
+.input-error {
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+.error-messages {
+  color: red;
+  margin-top: 10px;
+}
