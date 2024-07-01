@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -48,6 +49,7 @@ const profileService = {
       console.error("Error deleting document: ", error);
     }
   },
+  
   getProfilesByUserId: async (userId) => {
     try {
       const querySnapshot = await getDocs(
@@ -62,6 +64,14 @@ const profileService = {
       console.error("Error getting documents: ", error);
     }
   },
+
+
+  
+
 };
+
+
+
+  
 
 export default profileService;

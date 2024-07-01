@@ -4,6 +4,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
 } from "firebase/auth";
 
 const firebaseConfig = {

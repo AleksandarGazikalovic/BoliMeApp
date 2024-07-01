@@ -54,17 +54,17 @@ const LandingPage = () => {
     // Add logic to handle profile selection, e.g., navigating to a different page or setting a state
   };
 
-  const renderAvatar = (avatar, name) => {
+  const renderAvatar = (avatar, firstname) => {
     return avatar ? (
       <IonAvatar
         className="profile-avatar ion-activatable"
         style={{ cursor: "pointer" }}
       >
-        <IonImg src={avatar} alt={name} />
+        <IonImg src={avatar} alt={firstname} />
         <IonRippleEffect></IonRippleEffect>
       </IonAvatar>
     ) : (
-      <DefaultAvatar name={name} text={name} />
+      <DefaultAvatar name={firstname} text={firstname} />
     );
   };
 
@@ -101,7 +101,7 @@ const LandingPage = () => {
                     className="profile-card"
                     onClick={() => handleProfileSelect(profile.id)}
                   >
-                    {renderAvatar(profile.avatar, profile.name)}
+                    {renderAvatar(profile.avatar, profile.firstname)}
                   </div>
                 </IonCol>
               ))}

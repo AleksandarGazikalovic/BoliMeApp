@@ -15,4 +15,5 @@ export const ProfileSchema = Yup.object().shape({
     .required("Obavezno polje"),
   dateOfBirth: Yup.date().required("Obavezno polje"),
   sex: Yup.string().required("Obavezno polje"),
+  child: Yup.boolean().required("Obavezno polje"),
 });

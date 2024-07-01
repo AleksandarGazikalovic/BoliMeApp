@@ -8,20 +8,24 @@ const DefaultAvatar = ({ name, text }) => {
   const getDefaultAvatar = () => {
     return name?.charAt(0).toUpperCase();
   };
+
+  const avatarLetter = getDefaultAvatar();
+  console.log("Avatar Letter:", avatarLetter);
+
   return (
     <>
       <IonAvatar className="avatar ion-activatable">
-        <span>{getDefaultAvatar()}</span>
+        <span className="avatar-letter">{avatarLetter}</span>
         <IonRippleEffect></IonRippleEffect>
       </IonAvatar>
-      <p>{text}</p>
+      <p className="avatar-text">{text}</p>
     </>
   );
 };
 
 DefaultAvatar.propTypes = {
-  name: PropTypes.string,
-  text: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
 };
 
 export default DefaultAvatar;

@@ -77,6 +77,7 @@ const CreateProfile = () => {
             age: "",
             dateOfBirth: "",
             sex: "",
+            child: null,
           }}
           validationSchema={ProfileSchema}
           onSubmit={handleSubmit}
@@ -188,19 +189,45 @@ const CreateProfile = () => {
                 name="sex"
               >
                 <IonRadio value="male" labelPlacement="end" name="sex">
-                  Muski
+                  Muško
                 </IonRadio>
                 <br />
                 <br />
                 <IonRadio value="female" labelPlacement="end" name="sex">
-                  Zenski
+                  Žensko
                 </IonRadio>
               </IonRadioGroup>
-              <br />
               <br />
               {errors.sex && touched.sex ? (
                 <>
                   <IonText color="danger">{errors.sex}</IonText>
+                  <br />
+                </>
+              ) : null}
+              <br />
+
+              <IonLabel>Da li je profil za dete</IonLabel>
+              <IonRadioGroup
+                value={values.child}
+                onIonChange={(e) => handleChange(e)}
+                onIonBlur={handleBlur}
+                name="child"
+              >
+                <br />
+                <br />
+                <IonRadio value={true} labelPlacement="end" name="child">
+                  Da
+                </IonRadio>
+                <br />
+                <br />
+                <IonRadio value={false} labelPlacement="end" name="child">
+                  Ne
+                </IonRadio>
+                <br />
+              </IonRadioGroup>
+              {errors.child && touched.child ? (
+                <>
+                  <IonText color="danger">{errors.child}</IonText>
                   <br />
                 </>
               ) : null}

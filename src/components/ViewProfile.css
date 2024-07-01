@@ -1,0 +1,23 @@
+.view-profile {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-avatar {
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    color: #000;
+    font-size: 2rem;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  
+  .profile-avatar span {
+    line-height: 100px;
+  }
+  
