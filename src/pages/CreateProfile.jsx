@@ -189,12 +189,12 @@ const CreateProfile = () => {
                 name="sex"
               >
                 <IonRadio value="male" labelPlacement="end" name="sex">
-                  Muski
+                  Muško
                 </IonRadio>
                 <br />
                 <br />
                 <IonRadio value="female" labelPlacement="end" name="sex">
-                  Zenski
+                  Žensko
                 </IonRadio>
               </IonRadioGroup>
               <br />
