@@ -16,10 +16,17 @@ import React, { useState } from "react";
 
 const PainPage = () => {
   const [activeSegment, setActiveSegment] = useState("place");
+  const [highlightedPart, setHighlightedPart] = useState(null);
 
   const renderPainForm = () => {
     if (activeSegment === "place") {
-      return <TwoDModel />;
+      return (
+        <TwoDModel
+          highlightedPart={highlightedPart}
+          setHighlightedPart={setHighlightedPart}
+          setActiveSegment={setActiveSegment}
+        />
+      );
     } else if (activeSegment === "info") {
       return <PainInfo />;
     }
