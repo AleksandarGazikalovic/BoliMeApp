@@ -5,3 +5,9 @@
 .primary-color {
   color: var(--ion-color-primary);
 }
+
+/* BodyParts.css */
+.highlighted {
+  fill: yellow; /* Or any other style you want to apply */
+  stroke: red; /* Optionally, you can add a stroke color */
+}
