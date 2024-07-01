@@ -41,7 +41,7 @@ const Login = () => {
   const handleLogin = async (values, { setSubmitting }) => {
     try {
       await login(values.email, values.password);
-      history.push("/pain");
+      history.push("/landing-page");
     } catch (error) {
       console.error("Error logging in: ", error);
     } finally {
@@ -126,6 +126,7 @@ const Login = () => {
                     }`}
                     label="password"
                     type="password"
+                    name = "password"
                     placeholder="password"
                     labelPlacement="floating"
                     fill="outline"
