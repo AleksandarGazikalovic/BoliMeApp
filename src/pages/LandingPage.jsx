@@ -22,11 +22,13 @@ import { profileService } from "./../services";
 import { Menu } from "../components";
 import { DefaultAvatar } from "../components/";
 import { useHistory } from "react-router";
+import { useProfile } from "../context/ProfileContext";
 
 const LandingPage = () => {
   const [profiles, setProfiles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
+  const { setProfile } = useProfile();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -48,8 +50,9 @@ const LandingPage = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleProfileSelect = (profileId) => {
-    console.log(`Selected profile ID: ${profileId}`);
+  const handleProfileSelect = (profile) => {
+    console.log(`Selected profile ID: ${profile.profileId}`);
+    setProfile(profile);
     history.push(`/pain`);
     // Add logic to handle profile selection, e.g., navigating to a different page or setting a state
   };
@@ -96,10 +99,10 @@ const LandingPage = () => {
           <IonGrid>
             <IonRow>
               {profiles?.map((profile) => (
-                <IonCol key={profile.id} size="6" sizeMd="3">
+                <IonCol key={profile.profileId} size="6" sizeMd="3">
                   <div
                     className="profile-card"
-                    onClick={() => handleProfileSelect(profile.id)}
+                    onClick={() => handleProfileSelect(profile)}
                   >
                     {renderAvatar(profile.avatar, profile.firstname)}
                   </div>

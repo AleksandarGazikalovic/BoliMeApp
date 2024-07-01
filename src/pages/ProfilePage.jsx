@@ -1,4 +1,4 @@
-import "./ProfilePage.css"
+import "./ProfilePage.css";
 import {
   IonButtons,
   IonContent,
@@ -13,28 +13,25 @@ import {
 } from "@ionic/react";
 import Menu from "../components/Menu";
 import React, { useState } from "react";
-import {EditProfile, ViewProfile} from "../components/";
-
-
+import { EditProfile, ViewProfile } from "../components/";
+import { useProfile } from "../context/ProfileContext";
 
 const ProfilePage = () => {
-
   const [activeSegment, setActiveSegment] = useState("view");
+  const { profile } = useProfile();
 
   const renderPainForm = () => {
-    if(activeSegment === "view"){
-      return <ViewProfile/>;
-
-    } else if(activeSegment === "edit"){
-      return <EditProfile/>;
+    if (activeSegment === "view") {
+      return <ViewProfile profile={profile} />;
+    } else if (activeSegment === "edit") {
+      return <EditProfile profile={profile} />;
     }
-  }
+  };
 
-  return(
-
-        <div>
-          <Menu/>
-            <IonPage id="main-content">
+  return (
+    <>
+      <Menu />
+      <IonPage id="main-content">
         <IonHeader>
           <IonToolbar>
             <IonTitle>Dodaj novi bol</IonTitle>
@@ -55,16 +52,11 @@ const ProfilePage = () => {
               <IonLabel>Izmeni profil</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-          {renderPainForm()}
+          <div className="ion-padding">{renderPainForm()}</div>
         </IonContent>
       </IonPage>
-
-
-        </div>
-
-
-  ) 
-
+    </>
+  );
 };
 
 export default ProfilePage;
