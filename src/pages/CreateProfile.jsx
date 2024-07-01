@@ -21,9 +21,13 @@ import { auth } from "../components/FirebaseConfig";
 import { profileService } from "../services";
 import { Field, Form, Formik } from "formik";
 import { ProfileSchema } from "../validation/newProfileValidation";
+import { useProfile } from "../context/ProfileContext";
+import { useHistory } from "react-router";
 
 const CreateProfile = () => {
   const [userId, setUserId] = useState(null);
+  const { setProfile } = useProfile();
+  const history = useHistory();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -41,11 +45,9 @@ const CreateProfile = () => {
       // Add a new document with a generated id to "profiles" collection
       const docRefId = await profileService.createProfile(userId, values);
       console.log("Document written with ID: ", docRefId);
+      setProfile(values);
+      history.push("/pain");
 
-      // Optionally: Navigate user to another page after profile creation
-      // history.push("/profile-list");
-
-      // Clear form fields after submission
       resetForm();
     } catch (error) {
       console.error("Error adding document: ", error);

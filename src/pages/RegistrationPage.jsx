@@ -17,9 +17,11 @@ import { Field, Form, Formik } from "formik";
 import { profileService } from "../services";
 import { RegistrationSchema } from "../validation/newUserValidation";
 import { ProfileSchema } from "../validation/newProfileValidation";
+import { useProfile } from "../context/ProfileContext";
 
 const RegistrationPage = () => {
   const history = useHistory();
+  const { setProfile } = useProfile();
 
   const handleRegister = async (values, { setSubmitting }) => {
     try {
@@ -29,7 +31,8 @@ const RegistrationPage = () => {
         lastname: values.lastname,
         dateOfBirth: values.dateOfBirth,
       });
-      history.push("/profile-list");
+      setProfile(profile);
+      history.push("/pain");
       console.log("User created with ID: ", user.uid);
     } catch (error) {
       console.error("Error creating user: ", error);

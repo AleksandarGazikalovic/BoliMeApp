@@ -49,7 +49,7 @@ const profileService = {
       console.error("Error deleting document: ", error);
     }
   },
-  
+
   getProfilesByUserId: async (userId) => {
     try {
       const querySnapshot = await getDocs(
@@ -57,21 +57,13 @@ const profileService = {
       );
       const profiles = [];
       querySnapshot.forEach((doc) => {
-        profiles.push(doc.data());
+        profiles.push({ profileId: doc.id, ...doc.data() });
       });
       return profiles;
     } catch (error) {
       console.error("Error getting documents: ", error);
     }
   },
-
-
-  
-
 };
-
-
-
-  
 
 export default profileService;
