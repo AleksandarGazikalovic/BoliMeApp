@@ -89,16 +89,22 @@ const PainInfo = () => {
             <IonSelectOption value="neuropatski">
               Neuropatski bol 
             </IonSelectOption>
+            <IonSelectOption value="drugo">Drugo</IonSelectOption>
           </IonSelect>
-          <br />
 
-          <IonLabel position="stacked">
-            Označite datum početka :
-          </IonLabel>
-          <br />
           {selectedOption && (
         <IonNote>{descriptions[selectedOption]}</IonNote>
           )}
+
+          {selectedOption == "drugo" && (
+            <IonInput label="Opišite tip bola" type="text" labelPlacement="floating" fill="outline" placeholder="Opišite tip bola"/>
+          )}
+
+          <br />
+          <br />
+          <IonLabel position="stacked">
+            Označite datum početka :
+          </IonLabel>
           <br />
           <br />
           <IonInput
@@ -107,6 +113,8 @@ const PainInfo = () => {
             labelPlacement="floating"
             fill="outline"
           />
+            
+           
           <br />
           <IonLabel position="stacked">
             Označite trajanje bola :
