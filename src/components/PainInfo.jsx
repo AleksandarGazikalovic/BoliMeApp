@@ -20,12 +20,20 @@ const PainInfo = () => {
   const [qualityOfLife, setQualityOfLife] = useState(5);
 
   //Ovo je za tip bola da se prikaze deskripcija 
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionPain, setSelectedOptionPain] = useState(null);
+  const [selectedOptionCause, setSelectedOptionCause] = useState(null);
 
-  const handleSelection = (event) => {
+  const handleSelectionTypeOfPain = (event) => {
     const selectedValue = event.detail.value;
-    setSelectedOption(selectedValue);
+    setSelectedOptionPain(selectedValue);
   };
+
+
+  const handleSelectionCauseOfPain = (event) => {
+    const selectedValue = event.detail.value;
+    setSelectedOptionCause(selectedValue);
+  };
+
 
   const descriptions = {
     ostar: "Oštar bol - Ovo je obično oblik akutne boli, jer je često povezan sa naglim povredama ili neposrednim oštećenjem tkiva.",
@@ -86,18 +94,18 @@ const PainInfo = () => {
         Označite tip bola :
       </IonLabel>
       <br />
-      <IonSelect label="Tip bola" placeholder="Tip bola" onIonChange={handleSelection}>
+      <IonSelect label="Tip bola" placeholder="Tip bola" onIonChange={handleSelectionTypeOfPain}>
         <IonSelectOption value="ostar">Oštar bol </IonSelectOption>
         <IonSelectOption value="tup">Tup bol </IonSelectOption>
         <IonSelectOption value="pulsirajuci">Pulsirajući bol </IonSelectOption>
         <IonSelectOption value="ukocenost">Ukočenost </IonSelectOption>
         <IonSelectOption value="neuropatski">Neuropatski bol </IonSelectOption>
-        <IonSelectOption value="drugo">Drugo</IonSelectOption>
+        <IonSelectOption value="drugo-tip">Drugo</IonSelectOption>
       </IonSelect>
 
-      {selectedOption && <IonNote>{descriptions[selectedOption]}</IonNote>}
+      {selectedOptionPain && <IonNote>{descriptions[selectedOptionPain]}</IonNote>}
 
-      {selectedOption === "drugo" && (
+      {selectedOptionPain === "drugo-tip" && (
         <IonInput label="Opišite tip bola" type="text" labelPlacement="floating" fill="outline" placeholder="Opišite tip bola" />
       )}
 
@@ -155,15 +163,20 @@ const PainInfo = () => {
           fill="outline"
         />
         <div className="ion-justify-content-end">
-          <IonSelect placeholder="Uzrok">
+          <IonSelect placeholder="Uzrok" onIonChange={handleSelectionCauseOfPain}>
             <IonSelectOption value="pokret">Pokret</IonSelectOption>
             <IonSelectOption value="povreda">Povreda</IonSelectOption>
-            <IonSelectOption value="hronicni-bol">Hronični bol</IonSelectOption>
-            <IonSelectOption value="drugo">Nešto drugo</IonSelectOption>
+            <IonSelectOption value="hronicni-bol">Stres</IonSelectOption>
+            <IonSelectOption value="drugo-uzrok">Drugo</IonSelectOption>
           </IonSelect>
         </div>
+        
+        
       </div>
-
+      <br />
+      {selectedOptionCause === "drugo-uzrok" && (
+        <IonInput label="Opišite uzrok bola" type="text" labelPlacement="floating" fill="outline" placeholder="Opišite uzrok bola" />
+      )}
       <br />
       <IonLabel className="ion-margin-top">Da li koristiš neki lek:</IonLabel>
       <br />
