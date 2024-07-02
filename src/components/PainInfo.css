@@ -1,17 +1,39 @@
-.container-duration-of-pain{
+.container-duration-of-pain {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 10px;
     padding-top: 20px;
-    
-}
-
-.number-of-time{
-    width: 85%;
-}
-
-ion-select-option{
-    width: 80%;
-}
-
+  }
+  
+  .number-of-time {
+    width: 70%;
+  }
+  
+  .dosage-input .number-of-time,
+  .dosage-input ion-select {
+    width: calc(90% - 5px);
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+  }
+  
+  .ion-padding-top {
+    padding-top: 10px;
+  }
+  
+  .dosage-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .ion-margin-top {
+    margin-top: 10px;
+  }
+  
