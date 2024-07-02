@@ -13,7 +13,7 @@ import {
   IonTextarea,
 } from "@ionic/react";
 import "./PainInfo.css";
-import { happyOutline, sadOutline } from "ionicons/icons";
+import { happyOutline, sadOutline, closeOutline } from "ionicons/icons";
 
 const PainInfo = () => {
   const [valuePain, setValuePain] = useState(5); // Initial value
@@ -52,6 +52,11 @@ const PainInfo = () => {
     const updatedDosages = dosages.map((dosage, i) =>
       i === index ? { ...dosage, [name]: value } : dosage
     );
+    setDosages(updatedDosages);
+  };
+
+  const handleRemoveDosage = (index) => {
+    const updatedDosages = dosages.filter((_, i) => i !== index);
     setDosages(updatedDosages);
   };
 
@@ -205,7 +210,10 @@ const PainInfo = () => {
                     <IonSelectOption value="miligram">Miligrama</IonSelectOption>
                     <IonSelectOption value="kap">Kapi</IonSelectOption>
                   </IonSelect>
-                  <br />
+                  
+                  <IonButton fill="clear" onClick={() => handleRemoveDosage(index)}>
+                    <IonIcon icon={closeOutline} />
+                  </IonButton>
                 </div>
               </div>
             ))}
