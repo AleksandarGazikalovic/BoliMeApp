@@ -106,7 +106,7 @@ const PainInfo = () => {
       {selectedOptionPain && <IonNote>{descriptions[selectedOptionPain]}</IonNote>}
 
       {selectedOptionPain === "drugo-tip" && (
-        <IonInput label="Opišite tip bola" type="text" labelPlacement="floating" fill="outline" placeholder="Opišite tip bola" />
+        <IonInput label="Tip bola" type="text" labelPlacement="floating" fill="outline" placeholder="Opišite tip bola" />
       )}
 
       <br />
@@ -175,7 +175,7 @@ const PainInfo = () => {
       </div>
       <br />
       {selectedOptionCause === "drugo-uzrok" && (
-        <IonInput label="Opišite uzrok bola" type="text" labelPlacement="floating" fill="outline" placeholder="Opišite uzrok bola" />
+        <IonInput label="Uzrok bola" type="text" labelPlacement="floating" fill="outline" placeholder="Opišite uzrok bola" />
       )}
       <br />
       <IonLabel className="ion-margin-top">Da li koristiš neki lek:</IonLabel>
