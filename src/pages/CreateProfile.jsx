@@ -13,6 +13,7 @@ import {
   IonHeader,
   IonToolbar,
   IonButtons,
+  IonToast,
   IonBackButton,
 } from "@ionic/react";
 import "./CreateProfile.css";
@@ -27,6 +28,8 @@ import { useHistory } from "react-router";
 const CreateProfile = () => {
   const [userId, setUserId] = useState(null);
   const { setProfile } = useProfile();
+  const [showToast, setShowToast] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -45,6 +48,7 @@ const CreateProfile = () => {
       // Add a new document with a generated id to "profiles" collection
       const docRefId = await profileService.createProfile(userId, values);
       console.log("Document written with ID: ", docRefId);
+      setShowToast(true);
       setProfile(values);
       history.push("/pain");
 
@@ -245,6 +249,13 @@ const CreateProfile = () => {
             </Form>
           )}
         </Formik>
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Uspešno ste se napravili profil!"
+          duration={5000}
+          color={"success"}
+        />
       </IonContent>
     </IonPage>
   );
