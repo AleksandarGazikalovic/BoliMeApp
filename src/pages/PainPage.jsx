@@ -25,7 +25,6 @@ const PainPage = () => {
     handleOpenModal,
   } = usePainForm();
 
-  console.log(formik.values);
   const renderPainForm = () => {
     if (activeSegment === "place") {
       return <TwoDModel formik={formik} setActiveSegment={setActiveSegment} />;

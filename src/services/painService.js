@@ -60,6 +60,8 @@ const painService = {
         )
       );
       const pains = [];
+      console.log("querySnapshot", querySnapshot);
+      console.log("pains", pains);
       querySnapshot.forEach((doc) => {
         pains.push({ profileId: doc.id, ...doc.data() });
       });
