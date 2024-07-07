@@ -18,6 +18,7 @@ import {
   IonInputPasswordToggle,
   IonRouterLink,
   IonText,
+  IonToast,
 } from "@ionic/react";
 import { logInOutline, personCircleOutline } from "ionicons/icons"; // Import the specific icon
 import "./Login.css";
@@ -30,6 +31,7 @@ const Login = () => {
   const [showCard, setShowCard] = useState(false);
 
   const [buttonAnimation, setButtonAnimation] = useState(true); // State to manage button animation
+  const [showToast, setShowToast] = useState(false);
 
   const toggleCard = () => {
     setShowCard(!showCard);
@@ -41,6 +43,7 @@ const Login = () => {
   const handleLogin = async (values, { setSubmitting }) => {
     try {
       await login(values.email, values.password);
+      setShowToast(true);
       history.push("/landing-page");
     } catch (error) {
       console.error("Error logging in: ", error);
@@ -181,6 +184,13 @@ const Login = () => {
             </Formik>
           </IonCardContent>
         </IonCard>
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Uspešno ste se prijavili!"
+          duration={5000}
+          color={"success"}
+        />
       </IonContent>
     </IonPage>
   );
