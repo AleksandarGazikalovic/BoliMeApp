@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Body = ({ highlightedPart, setHighlightedPart }) => {
   const handleClick = (event) => {
     const id = event.target.id;
-    setHighlightedPart(id);
+    setHighlightedPart("painArea", id);
   };
 
   const getHighlightStyle = (id) => {

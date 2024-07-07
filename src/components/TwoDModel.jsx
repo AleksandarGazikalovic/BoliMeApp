@@ -5,11 +5,7 @@ import "./TwoDModel.css"; // Make sure to import your CSS file
 import Body from "./Body";
 import PropTypes from "prop-types";
 
-const TwoDModel = ({
-  highlightedPart,
-  setHighlightedPart,
-  setActiveSegment,
-}) => {
+const TwoDModel = ({ formik, setActiveSegment }) => {
   const [rotation, setRotation] = useState(0);
   const [isPrimary, setIsPrimary] = useState(false);
 
@@ -26,8 +22,8 @@ const TwoDModel = ({
     <div className="ion-text-center ion-padding">
       <h1>Izaberite mesto koje vas boli</h1>
       <Body
-        highlightedPart={highlightedPart}
-        setHighlightedPart={setHighlightedPart}
+        highlightedPart={formik.values.painArea}
+        setHighlightedPart={formik.setFieldValue}
       />
       <br />
       <IonIcon
@@ -39,7 +35,7 @@ const TwoDModel = ({
       />
       <br />
       <br />
-      {highlightedPart && (
+      {formik.painArea && (
         <IonButton onClick={() => setActiveSegment("info")}>Dalje</IonButton>
       )}
     </div>
@@ -47,8 +43,7 @@ const TwoDModel = ({
 };
 
 TwoDModel.propTypes = {
-  highlightedPart: PropTypes.string,
-  setHighlightedPart: PropTypes.func,
+  formik: PropTypes.object,
   setActiveSegment: PropTypes.func,
 };
 

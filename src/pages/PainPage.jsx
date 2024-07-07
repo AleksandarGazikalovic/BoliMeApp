@@ -13,22 +13,33 @@ import {
 import Menu from "../components/Menu";
 import { TwoDModel, PainInfo } from "../components/";
 import React, { useState } from "react";
+import { usePainForm } from "../hooks/usePainForm";
 
 const PainPage = () => {
   const [activeSegment, setActiveSegment] = useState("place");
-  const [highlightedPart, setHighlightedPart] = useState(null);
+  const {
+    formik,
+    modal,
+    handleAddDosage,
+    handleRemoveDosage,
+    handleOpenModal,
+  } = usePainForm();
 
+  console.log(formik.values);
   const renderPainForm = () => {
     if (activeSegment === "place") {
+      return <TwoDModel formik={formik} setActiveSegment={setActiveSegment} />;
+    } else if (activeSegment === "info") {
       return (
-        <TwoDModel
-          highlightedPart={highlightedPart}
-          setHighlightedPart={setHighlightedPart}
+        <PainInfo
+          formik={formik}
+          modal={modal}
+          handleAddDosage={handleAddDosage}
+          handleRemoveDosage={handleRemoveDosage}
+          handleOpenModal={handleOpenModal}
           setActiveSegment={setActiveSegment}
         />
       );
-    } else if (activeSegment === "info") {
-      return <PainInfo />;
     }
     // Add more conditions for other segments as needed
   };
