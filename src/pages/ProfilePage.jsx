@@ -34,7 +34,7 @@ const ProfilePage = () => {
       <IonPage id="main-content">
         <IonHeader>
           <IonToolbar>
-            <IonTitle>Dodaj novi bol</IonTitle>
+            <IonTitle>Profil</IonTitle>
             <IonButtons slot="end">
               <IonMenuButton />
             </IonButtons>
