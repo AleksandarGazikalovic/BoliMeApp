@@ -87,7 +87,7 @@ const LandingPage = () => {
             </IonButtons>
           </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen color="light">
+        <IonContent fullscreen>
           <IonTitle
             className="ion-padding ion-text-center ioTitle"
             color={"primary"}

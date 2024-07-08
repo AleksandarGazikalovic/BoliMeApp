@@ -16,7 +16,7 @@ const DefaultAvatar = ({ name, text }) => {
         <span className="avatar-letter">{avatarLetter}</span>
         <IonRippleEffect></IonRippleEffect>
       </IonAvatar>
-      <p className="avatar-text">{text}</p>
+      <p>{text}</p>
     </>
   );
 };

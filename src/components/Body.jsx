@@ -76,10 +76,10 @@ const Body = ({ highlightedPart, setHighlightedPart }) => {
         style={getHighlightStyle("desna-potkolenica")}
       />
       <path
-        id="leva-noga"
+        id="leva-potkolenica"
         d="M34 310.801C34 309.231 34.5457 304.378 35.2402 300L61 300.959L60.7872 308.184L60.259 321.252L58.5054 334.307L57.2652 340.064L57.0841 350.114L58.555 361H44.4424L42.489 350.114L39.4567 338.922C35.5874 325.885 34 317.605 34 310.801Z"
         fill="#EBB49B"
-        style={getHighlightStyle("leva-noga")}
+        style={getHighlightStyle("leva-potkolenica")}
       />
       <path
         id="levo-koleno"
