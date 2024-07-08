@@ -1,0 +1,16 @@
+.round-button {
+  --width: 40px;
+  --height: 40px;
+  --border-radius: 50%;
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--border-radius);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-button ion-icon {
+  font-size: 20px;
+}

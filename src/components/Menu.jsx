@@ -12,10 +12,10 @@ function Menu() {
     <IonMenu side="end" contentId="main-content">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Menu Content</IonTitle>
+          <IonTitle>Meni</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">This is the menu content.</IonContent>
+      <IonContent className="ion-padding"></IonContent>
     </IonMenu>
   );
 }

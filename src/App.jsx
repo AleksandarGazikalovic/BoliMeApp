@@ -19,9 +19,13 @@ import {
   PainPage,
   LoginPage,
   RegistrationPage,
+  HistoryPage,
+  CreateProfile,
+  ForgottenPassword,
+  LandingPage,
 } from "./pages";
 
-import { analyticsOutline, medkitOutline } from "ionicons/icons";
+import { analyticsOutline, bookOutline, medkitOutline } from "ionicons/icons";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -51,9 +55,6 @@ import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import LandingPage from "./pages/LandingPage";
-import CreateProfile from "./pages/CreateProfile";
-import ForgottenPassword from "./pages/ForgottenPassword";
 
 setupIonicReact();
 
@@ -85,6 +86,11 @@ const App = () => (
         />
         <IonTabs>
           <IonRouterOutlet>
+            <Route
+              path="/history"
+              render={() => <HistoryPage />}
+              exact={true}
+            />
             <Route path="/pain" render={() => <PainPage />} exact={true} />
             <Route
               path="/analytics"
@@ -99,6 +105,10 @@ const App = () => (
           </IonRouterOutlet>
 
           <IonTabBar slot="bottom">
+            <IonTabButton tab="history" href="/history">
+              <IonIcon icon={bookOutline} />
+              <IonLabel>Istorija</IonLabel>
+            </IonTabButton>
             <IonTabButton tab="pain" href="/pain">
               <IonIcon icon={medkitOutline} />
               <IonLabel>Dodaj bol</IonLabel>

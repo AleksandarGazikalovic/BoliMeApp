@@ -17,12 +17,11 @@ import {
   IonLoading,
 } from "@ionic/react";
 import "./LandingPage.css";
-import { auth } from "../components/FirebaseConfig";
-import { profileService } from "./../services";
-import { Menu } from "../components";
-import { DefaultAvatar } from "../components/";
+import { auth } from "../../components/FirebaseConfig";
+import { useProfile } from "../../context/ProfileContext";
 import { useHistory } from "react-router";
-import { useProfile } from "../context/ProfileContext";
+import { profileService } from "../../services";
+import { DefaultAvatar, Menu } from "../../components";
 
 const LandingPage = () => {
   const [profiles, setProfiles] = useState([]);
@@ -87,7 +86,7 @@ const LandingPage = () => {
             </IonButtons>
           </IonToolbar>
         </IonHeader>
-        <IonContent fullscreen color="light">
+        <IonContent fullscreen>
           <IonTitle
             className="ion-padding ion-text-center ioTitle"
             color={"primary"}

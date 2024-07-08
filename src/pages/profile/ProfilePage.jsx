@@ -1,3 +1,4 @@
+import "./ProfilePage.css";
 import {
   IonButtons,
   IonContent,
@@ -10,30 +11,30 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import Menu from "../components/Menu";
-import PainHistory from "../components/PainHistory";
-import ViewBody from "../components/ViewBody";
-import { useState } from "react";
+import Menu from "../../components/Menu";
+import React, { useState } from "react";
+import { EditProfile, ViewProfile } from "../../modules";
+import { useProfile } from "../../context/ProfileContext";
 
-
-const AnalyticsPage = () => {
-  const [activeSegment, setActiveSegment] = useState("body");
+const ProfilePage = () => {
+  const [activeSegment, setActiveSegment] = useState("view");
+  const { profile } = useProfile();
 
   const renderPainForm = () => {
-    if (activeSegment === "body") {
-      return <ViewBody  />;
-    } else if (activeSegment === "history") {
-      return <PainHistory  />;
+    if (activeSegment === "view") {
+      return <ViewProfile profile={profile} />;
+    } else if (activeSegment === "edit") {
+      return <EditProfile profile={profile} />;
     }
   };
 
-   return (
+  return (
     <>
       <Menu />
       <IonPage id="main-content">
         <IonHeader>
           <IonToolbar>
-            <IonTitle>Dodaj novi bol</IonTitle>
+            <IonTitle>Profil</IonTitle>
             <IonButtons slot="end">
               <IonMenuButton />
             </IonButtons>
@@ -44,11 +45,11 @@ const AnalyticsPage = () => {
             value={activeSegment}
             onIonChange={(e) => setActiveSegment(e.detail.value)}
           >
-            <IonSegmentButton value="body">
-              <IonLabel>Mapa bola</IonLabel>
+            <IonSegmentButton value="view">
+              <IonLabel>Vidi profil</IonLabel>
             </IonSegmentButton>
-            <IonSegmentButton value="history">
-              <IonLabel>Istorija bola</IonLabel>
+            <IonSegmentButton value="edit">
+              <IonLabel>Izmeni profil</IonLabel>
             </IonSegmentButton>
           </IonSegment>
           <div className="ion-padding">{renderPainForm()}</div>
@@ -58,4 +59,4 @@ const AnalyticsPage = () => {
   );
 };
 
-export default AnalyticsPage;
+export default ProfilePage;
