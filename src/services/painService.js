@@ -63,7 +63,7 @@ const painService = {
       console.log("querySnapshot", querySnapshot);
       console.log("pains", pains);
       querySnapshot.forEach((doc) => {
-        pains.push({ profileId: doc.id, ...doc.data() });
+        pains.push({ painId: doc.id, ...doc.data() });
       });
       return pains;
     } catch (error) {

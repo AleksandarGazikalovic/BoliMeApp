@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   IonButtons,
   IonContent,
@@ -13,24 +13,11 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { BodyMap, Menu, PainList } from "../components";
-import { useProfile } from "../context/ProfileContext";
-import painService from "../services/painService";
+import { usePains } from "../context/PainContext";
 
 const HistoryPage = () => {
   const [activeSegment, setActiveSegment] = useState("list");
-  const { profile } = useProfile();
-  const [pains, setPains] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    loadPains();
-  }, [profile.profileId]);
-
-  const loadPains = () => {
-    painService.getPainsByProfileId(profile.profileId).then((data) => {
-      setPains(data);
-      setIsLoading(false);
-    });
-  };
+  const { pains, loadPains, isLoading } = usePains();
 
   const renderPainForm = () => {
     if (activeSegment === "list") {

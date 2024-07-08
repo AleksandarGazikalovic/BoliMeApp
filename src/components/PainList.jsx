@@ -1,6 +1,8 @@
 import React from "react";
 import painService from "../services/painService";
 import {
+  IonButton,
+  IonButtons,
   IonChip,
   IonFab,
   IonFabButton,
@@ -14,6 +16,7 @@ import PropTypes from "prop-types";
 import { add, createOutline, trashOutline } from "ionicons/icons";
 import { resolvePainArea, resolvePainType } from "../utils/painUtils";
 import { useHistory } from "react-router";
+import "./PainList.css";
 
 const PainList = ({ pains, loadPains }) => {
   const history = useHistory();
@@ -51,16 +54,22 @@ const PainList = ({ pains, loadPains }) => {
               <p>{resolvePainType(pain.selectedOptionPain)}</p>
             </IonLabel>
             {resolveChip(pain.valuePain)}
-            <IonIcon
-              icon={createOutline}
-              slot="end"
-              onClick={handleEditClick}
-            ></IonIcon>
-            <IonIcon
-              icon={trashOutline}
-              slot="end"
-              onClick={handleDeleteClick}
-            />
+            <IonButtons slot="end">
+              <IonButton
+                fill="clear"
+                className="round-button"
+                onClick={() => handleEditClick(pain)}
+              >
+                <IonIcon icon={createOutline} />
+              </IonButton>
+              <IonButton
+                fill="clear"
+                className="round-button"
+                onClick={() => handleDeleteClick(pain.painId)}
+              >
+                <IonIcon icon={trashOutline} />
+              </IonButton>
+            </IonButtons>
           </IonItem>
         ))}
         {pains.length === 0 && (

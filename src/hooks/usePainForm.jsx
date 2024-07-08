@@ -4,11 +4,13 @@ import { useHistory } from "react-router";
 import { PainSchema } from "../validation/newPainValidation";
 import painService from "../services/painService";
 import { useRef } from "react";
+import { usePains } from "../context/PainContext";
 
 export const usePainForm = () => {
   const { profile } = useProfile();
   const history = useHistory();
   const modal = useRef(null);
+  const { loadPains } = usePains();
 
   const formik = useFormik({
     initialValues: {
@@ -28,7 +30,7 @@ export const usePainForm = () => {
       comment: "",
     },
     validationSchema: PainSchema,
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
       //   const painData = {
       //     painArea: values.painArea,
       //     valuePain: values.valuePain,
@@ -53,7 +55,9 @@ export const usePainForm = () => {
           values
         );
         console.log("Document written with ID: ", docRefId);
+        loadPains();
         history.push("/history");
+        resetForm();
       } catch (error) {
         console.error("Error adding document: ", error);
       } finally {

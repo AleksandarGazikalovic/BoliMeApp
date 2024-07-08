@@ -3,12 +3,15 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "../index.css";
 import { ProfileProvider } from "./context/ProfileContext";
+import { PainProvider } from "./context/PainContext";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ProfileProvider>
-      <App />
+      <PainProvider>
+        <App />
+      </PainProvider>
     </ProfileProvider>
   </React.StrictMode>
 );
