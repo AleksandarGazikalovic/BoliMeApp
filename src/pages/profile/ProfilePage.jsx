@@ -11,10 +11,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import Menu from "../components/Menu";
+import Menu from "../../components/Menu";
 import React, { useState } from "react";
-import { EditProfile, ViewProfile } from "../components/";
-import { useProfile } from "../context/ProfileContext";
+import { EditProfile, ViewProfile } from "../../modules";
+import { useProfile } from "../../context/ProfileContext";
 
 const ProfilePage = () => {
   const [activeSegment, setActiveSegment] = useState("view");

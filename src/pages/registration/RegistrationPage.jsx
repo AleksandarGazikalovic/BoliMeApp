@@ -10,14 +10,14 @@ import {
 } from "@ionic/react";
 import { personCircleOutline } from "ionicons/icons";
 import "./Registration.css";
-import { register } from "../components/FirebaseConfig";
+import { register } from "../../components/FirebaseConfig";
 import React from "react";
 import { useHistory } from "react-router";
 import { Field, Form, Formik } from "formik";
-import { profileService } from "../services";
-import { RegistrationSchema } from "../validation/newUserValidation";
-import { ProfileSchema } from "../validation/newProfileValidation";
-import { useProfile } from "../context/ProfileContext";
+import { profileService } from "../../services";
+import { RegistrationSchema } from "../../validation/newUserValidation";
+import { ProfileSchema } from "../../validation/newProfileValidation";
+import { useProfile } from "../../context/ProfileContext";
 
 const RegistrationPage = () => {
   const history = useHistory();

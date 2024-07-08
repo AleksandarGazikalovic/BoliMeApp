@@ -18,11 +18,11 @@ import {
 } from "@ionic/react";
 import "./CreateProfile.css";
 import { personAddOutline } from "ionicons/icons";
-import { auth } from "../components/FirebaseConfig";
-import { profileService } from "../services";
+import { auth } from "../../components/FirebaseConfig";
+import { profileService } from "../../services";
 import { Field, Form, Formik } from "formik";
-import { ProfileSchema } from "../validation/newProfileValidation";
-import { useProfile } from "../context/ProfileContext";
+import { ProfileSchema } from "../../validation/newProfileValidation";
+import { useProfile } from "../../context/ProfileContext";
 import { useHistory } from "react-router";
 
 const CreateProfile = () => {

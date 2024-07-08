@@ -8,7 +8,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import Menu from "../components/Menu";
+import Menu from "../../components/Menu";
 
 const AnalyticsPage = () => {
   return (

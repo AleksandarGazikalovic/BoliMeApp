@@ -22,10 +22,10 @@ import {
 } from "@ionic/react";
 import { logInOutline, personCircleOutline } from "ionicons/icons"; // Import the specific icon
 import "./Login.css";
-import logo from "../assets/logo.png";
-import { auth, firebase, login } from "../components/FirebaseConfig"; // Assuming firebaseConfig is the file where Firebase is configured
+import logo from "../../assets/logo.png";
+import { auth, firebase, login } from "../../components/FirebaseConfig"; // Assuming firebaseConfig is the file where Firebase is configured
 import { Field, Form, Formik } from "formik";
-import { LoginSchema } from "../validation/loginValidation";
+import { LoginSchema } from "../../validation/loginValidation";
 
 const Login = () => {
   const [showCard, setShowCard] = useState(false);
@@ -129,7 +129,7 @@ const Login = () => {
                     }`}
                     label="password"
                     type="password"
-                    name = "password"
+                    name="password"
                     placeholder="password"
                     labelPlacement="floating"
                     fill="outline"

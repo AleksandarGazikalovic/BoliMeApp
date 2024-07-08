@@ -1,6 +1,9 @@
-export { default as LoginPage } from "./LoginPage";
-export { default as PainPage } from "./PainPage";
-export { default as AnalyticsPage } from "./AnalyticsPage";
-export { default as ProfilePage } from "./ProfilePage";
-export { default as RegistrationPage } from "./RegistrationPage";
-export { default as HistoryPage } from "./HistoryPage";
+export { default as LoginPage } from "./login/LoginPage";
+export { default as PainPage } from "./pain/PainPage";
+export { default as AnalyticsPage } from "./analytics/AnalyticsPage";
+export { default as ProfilePage } from "./profile/ProfilePage";
+export { default as RegistrationPage } from "./registration/RegistrationPage";
+export { default as HistoryPage } from "./history/HistoryPage";
+export { default as CreateProfile } from "./create-profile/CreateProfile";
+export { default as ForgottenPassword } from "./forgotten-password/ForgottenPassword";
+export { default as LandingPage } from "./landing/LandingPage";

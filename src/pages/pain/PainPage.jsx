@@ -10,10 +10,10 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import Menu from "../components/Menu";
-import { TwoDModel, PainInfo } from "../components/";
+import Menu from "../../components/Menu";
+import { TwoDModel, PainInfo } from "../../modules";
 import React, { useState } from "react";
-import { usePainForm } from "../hooks/usePainForm";
+import { usePainForm } from "../../hooks/usePainForm";
 
 const PainPage = () => {
   const [activeSegment, setActiveSegment] = useState("place");

@@ -12,9 +12,9 @@ import {
 import { createOutline } from "ionicons/icons";
 import PropTypes from "prop-types";
 import { Field, Form, Formik } from "formik";
-import { profileService } from "../services";
-import { useProfile } from "../context/ProfileContext";
-import { ProfileSchema } from "../validation/newProfileValidation";
+import { profileService } from "../../services";
+import { useProfile } from "../../context/ProfileContext";
+import { ProfileSchema } from "../../validation/newProfileValidation";
 
 const EditProfile = ({ profile }) => {
   const { setProfile } = useProfile();

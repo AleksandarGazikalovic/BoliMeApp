@@ -8,7 +8,7 @@ import {
   IonToast,
 } from "@ionic/react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../components/FirebaseConfig";
+import { auth } from "../../components/FirebaseConfig";
 import "./ForgottenPassword.css";
 import { useHistory } from "react-router";
 

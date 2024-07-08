@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { syncOutline } from "ionicons/icons";
 import { IonButton, IonIcon } from "@ionic/react";
 import "./TwoDModel.css"; // Make sure to import your CSS file
-import Body from "./Body";
+import Body from "../../components/Body";
 import PropTypes from "prop-types";
-import { resolvePainArea } from "../utils/painUtils";
+import { resolvePainArea } from "../../utils/painUtils";
 
 const TwoDModel = ({ formik, setActiveSegment }) => {
   const [rotation, setRotation] = useState(0);

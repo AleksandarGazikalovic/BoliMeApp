@@ -1,5 +1,5 @@
 import React from "react";
-import painService from "../services/painService";
+import painService from "../../services/painService";
 import {
   IonButton,
   IonButtons,
@@ -14,7 +14,7 @@ import {
 } from "@ionic/react";
 import PropTypes from "prop-types";
 import { add, createOutline, trashOutline } from "ionicons/icons";
-import { resolvePainArea, resolvePainType } from "../utils/painUtils";
+import { resolvePainArea, resolvePainType } from "../../utils/painUtils";
 import { useHistory } from "react-router";
 import "./PainList.css";
 

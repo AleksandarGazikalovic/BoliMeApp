@@ -20,6 +20,9 @@ import {
   LoginPage,
   RegistrationPage,
   HistoryPage,
+  CreateProfile,
+  ForgottenPassword,
+  LandingPage,
 } from "./pages";
 
 import { analyticsOutline, bookOutline, medkitOutline } from "ionicons/icons";
@@ -52,9 +55,6 @@ import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
 import "./theme/variables.css";
-import LandingPage from "./pages/LandingPage";
-import CreateProfile from "./pages/CreateProfile";
-import ForgottenPassword from "./pages/ForgottenPassword";
 
 setupIonicReact();
 

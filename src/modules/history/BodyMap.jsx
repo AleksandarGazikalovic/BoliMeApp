@@ -6,7 +6,7 @@ import {
   getPathD,
   getPaths,
   resolvePainArea,
-} from "../utils/painUtils";
+} from "../../utils/painUtils";
 
 const BodyMap = ({ pains }) => {
   const [popoverState, setPopoverState] = useState({

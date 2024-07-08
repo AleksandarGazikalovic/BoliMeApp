@@ -12,8 +12,9 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { BodyMap, Menu, PainList } from "../components";
-import { usePains } from "../context/PainContext";
+import { BodyMap, PainList } from "../../modules";
+import { usePains } from "../../context/PainContext";
+import { Menu } from "../../components";
 
 const HistoryPage = () => {
   const [activeSegment, setActiveSegment] = useState("list");
