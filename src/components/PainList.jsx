@@ -63,6 +63,11 @@ const PainList = ({ pains, loadPains }) => {
             />
           </IonItem>
         ))}
+        {pains.length === 0 && (
+          <div className="ion-text-center ion-padding">
+            <h2>Nemate zabeleženih bolova</h2>
+          </div>
+        )}
       </IonList>
       <IonFab slot="fixed" vertical="bottom" horizontal="end">
         <IonFabButton>

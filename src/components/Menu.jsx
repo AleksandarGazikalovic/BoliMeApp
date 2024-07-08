@@ -15,7 +15,7 @@ function Menu() {
           <IonTitle>Menu Content</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">This is the menu content.</IonContent>
+      <IonContent className="ion-padding"></IonContent>
     </IonMenu>
   );
 }
