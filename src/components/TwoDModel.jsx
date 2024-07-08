@@ -4,6 +4,7 @@ import { IonButton, IonIcon } from "@ionic/react";
 import "./TwoDModel.css"; // Make sure to import your CSS file
 import Body from "./Body";
 import PropTypes from "prop-types";
+import { resolvePainArea } from "../utils/painTransformer";
 
 const TwoDModel = ({ formik, setActiveSegment }) => {
   const [rotation, setRotation] = useState(0);
@@ -25,7 +26,7 @@ const TwoDModel = ({ formik, setActiveSegment }) => {
         highlightedPart={formik.values.painArea}
         setHighlightedPart={formik.setFieldValue}
       />
-      <br />
+      <h2>{resolvePainArea(formik.values.painArea)}</h2>
       <IonIcon
         icon={syncOutline}
         onClick={handleRotation}
@@ -35,7 +36,7 @@ const TwoDModel = ({ formik, setActiveSegment }) => {
       />
       <br />
       <br />
-      {formik.painArea && (
+      {formik.values.painArea && (
         <IonButton onClick={() => setActiveSegment("info")}>Dalje</IonButton>
       )}
     </div>

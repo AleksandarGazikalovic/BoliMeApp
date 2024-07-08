@@ -5,13 +5,16 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonLoading,
   IonRippleEffect,
 } from "@ionic/react";
 import PropTypes from "prop-types";
 import { createOutline, trashOutline } from "ionicons/icons";
+import { resolvePainArea } from "../utils/painTransformer";
 
 const PainList = ({ profileId }) => {
   const [pains, setPains] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     loadPains();
@@ -20,6 +23,7 @@ const PainList = ({ profileId }) => {
   const loadPains = () => {
     painService.getPainsByProfileId(profileId).then((data) => {
       setPains(data);
+      setIsLoading(false);
     });
   };
 
@@ -28,17 +32,22 @@ const PainList = ({ profileId }) => {
   };
 
   const handleDeleteClick = (painId) => {
+    setIsLoading(true);
     painService.deletePain(painId).then(() => {
       loadPains();
     });
   };
+
+  if (isLoading) {
+    return <IonLoading isOpen={isLoading} spinner={"circles"} />;
+  }
 
   return (
     <IonList inset={true}>
       {pains?.map((pain) => (
         <IonItem key={pain.painId}>
           <IonLabel>
-            <h2>{pain.painArea}</h2>
+            <h2>{resolvePainArea(pain.painArea)}</h2>
             <p>{pain.valuePain + " jačina bola"}</p>
           </IonLabel>
           <IonIcon icon={createOutline} slot="end" onClick={handleEditClick}>
