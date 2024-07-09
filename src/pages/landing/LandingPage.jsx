@@ -11,8 +11,6 @@ import {
   IonAvatar,
   IonRippleEffect,
   IonRouterLink,
-  IonButtons,
-  IonMenuButton,
   IonImg,
   IonLoading,
 } from "@ionic/react";
@@ -20,7 +18,7 @@ import "./LandingPage.css";
 import { useProfile } from "../../context/ProfileContext";
 import { useHistory } from "react-router";
 import { profileService } from "../../services";
-import { DefaultAvatar, Menu } from "../../components";
+import { DefaultAvatar } from "../../components";
 import { useAuth } from "../../context/AuthContext";
 
 const LandingPage = () => {
@@ -63,50 +61,44 @@ const LandingPage = () => {
   }
 
   return (
-    <>
-      <Menu />
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Boli me</IonTitle>
-            <IonButtons slot="end">
-              <IonMenuButton />
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen>
-          <IonTitle
-            className="ion-padding ion-text-center ioTitle"
-            color={"primary"}
-          >
-            Koga boli?
-          </IonTitle>
-          <br />
-          <br />
-          <IonGrid>
-            <IonRow>
-              {profiles?.map((profile) => (
-                <IonCol key={profile.profileId} size="6" sizeMd="3">
-                  <div
-                    className="profile-card"
-                    onClick={() => handleProfileSelect(profile)}
-                  >
-                    {renderAvatar(profile.avatar, profile.firstname)}
-                  </div>
-                </IonCol>
-              ))}
-              <IonCol size="6" sizeMd="3" routerLink="create-profile">
-                <div className="profile-card">
-                  <IonRouterLink routerLink="/create-profile">
-                    <DefaultAvatar name="+" text="Dodaj profil" />
-                  </IonRouterLink>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Boli me</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen>
+        <IonTitle
+          className="ion-padding ion-text-center ioTitle"
+          color={"primary"}
+        >
+          Koga boli?
+        </IonTitle>
+        <br />
+        <br />
+        <IonGrid>
+          <IonRow>
+            {profiles?.map((profile) => (
+              <IonCol key={profile.profileId} size="6" sizeMd="3">
+                <div
+                  className="profile-card"
+                  onClick={() => handleProfileSelect(profile)}
+                >
+                  {renderAvatar(profile.avatar, profile.firstname)}
                 </div>
               </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonContent>
-      </IonPage>
-    </>
+            ))}
+            <IonCol size="6" sizeMd="3" routerLink="create-profile">
+              <div className="profile-card">
+                <IonRouterLink routerLink="/create-profile">
+                  <DefaultAvatar name="+" text="Dodaj profil" />
+                </IonRouterLink>
+              </div>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
+    </IonPage>
   );
 };
 

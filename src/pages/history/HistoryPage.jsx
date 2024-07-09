@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import {
-  IonButtons,
   IonContent,
   IonHeader,
   IonLabel,
   IonLoading,
-  IonMenuButton,
   IonNav,
   IonPage,
   IonSegment,
@@ -15,7 +13,6 @@ import {
 } from "@ionic/react";
 import { BodyMap, PainList } from "../../modules";
 import { usePains } from "../../context/PainContext";
-import { Menu } from "../../components";
 
 const HistoryPage = () => {
   const [activeSegment, setActiveSegment] = useState("list");
@@ -34,37 +31,31 @@ const HistoryPage = () => {
   }
 
   return (
-    <>
-      <Menu />
-      <IonNav
-        root={() => (
-          <IonPage id="main-content">
-            <IonHeader>
-              <IonToolbar>
-                <IonTitle>Istorija bolova</IonTitle>
-                <IonButtons slot="end">
-                  <IonMenuButton />
-                </IonButtons>
-              </IonToolbar>
-            </IonHeader>
-            <IonContent>
-              <IonSegment
-                value={activeSegment}
-                onIonChange={(e) => setActiveSegment(e.detail.value)}
-              >
-                <IonSegmentButton value="list">
-                  <IonLabel>Istorija</IonLabel>
-                </IonSegmentButton>
-                <IonSegmentButton value="map">
-                  <IonLabel>Mapa bola</IonLabel>
-                </IonSegmentButton>
-              </IonSegment>
-              {renderPainForm()}
-            </IonContent>
-          </IonPage>
-        )}
-      />
-    </>
+    <IonNav
+      root={() => (
+        <IonPage id="main-content">
+          <IonHeader>
+            <IonToolbar>
+              <IonTitle>Istorija bolova</IonTitle>
+            </IonToolbar>
+          </IonHeader>
+          <IonContent>
+            <IonSegment
+              value={activeSegment}
+              onIonChange={(e) => setActiveSegment(e.detail.value)}
+            >
+              <IonSegmentButton value="list">
+                <IonLabel>Istorija</IonLabel>
+              </IonSegmentButton>
+              <IonSegmentButton value="map">
+                <IonLabel>Mapa bola</IonLabel>
+              </IonSegmentButton>
+            </IonSegment>
+            {renderPainForm()}
+          </IonContent>
+        </IonPage>
+      )}
+    />
   );
 };
 

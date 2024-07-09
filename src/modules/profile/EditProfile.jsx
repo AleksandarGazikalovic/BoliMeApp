@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   IonInput,
@@ -8,6 +8,7 @@ import {
   IonIcon,
   IonText,
   IonLabel,
+  IonLoading,
 } from "@ionic/react";
 import { createOutline } from "ionicons/icons";
 import PropTypes from "prop-types";
@@ -20,9 +21,12 @@ import { useAuth } from "../../context/AuthContext";
 const EditProfile = ({ profile }) => {
   const { setProfile } = useProfile();
   const { getToken } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (values, { setSubmitting, setValues }) => {
     try {
+      setSubmitting(true);
+      setIsLoading(true);
       await profileService.updateProfile(
         profile.profileId,
         {
@@ -43,8 +47,13 @@ const EditProfile = ({ profile }) => {
       console.error("Error adding document: ", error);
     } finally {
       setSubmitting(false);
+      setIsLoading(false);
     }
   };
+
+  if (isLoading) {
+    return <IonLoading isOpen={isLoading} />;
+  }
   return (
     <Formik
       initialValues={{

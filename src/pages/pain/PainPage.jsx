@@ -1,16 +1,13 @@
 import {
-  IonButtons,
   IonContent,
   IonHeader,
   IonLabel,
-  IonMenuButton,
   IonPage,
   IonSegment,
   IonSegmentButton,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import Menu from "../../components/Menu";
 import { TwoDModel, PainInfo } from "../../modules";
 import React, { useState } from "react";
 import { usePainForm } from "../../hooks/usePainForm";
@@ -44,33 +41,27 @@ const PainPage = () => {
   };
 
   return (
-    <>
-      <Menu />
-      <IonPage id="main-content">
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Dodaj novi bol</IonTitle>
-            <IonButtons slot="end">
-              <IonMenuButton />
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <IonSegment
-            value={activeSegment}
-            onIonChange={(e) => setActiveSegment(e.detail.value)}
-          >
-            <IonSegmentButton value="place">
-              <IonLabel>Mesto bola</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="info">
-              <IonLabel>Način bola</IonLabel>
-            </IonSegmentButton>
-          </IonSegment>
-          {renderPainForm()}
-        </IonContent>
-      </IonPage>
-    </>
+    <IonPage id="main-content">
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Dodaj novi bol</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <IonSegment
+          value={activeSegment}
+          onIonChange={(e) => setActiveSegment(e.detail.value)}
+        >
+          <IonSegmentButton value="place">
+            <IonLabel>Mesto bola</IonLabel>
+          </IonSegmentButton>
+          <IonSegmentButton value="info">
+            <IonLabel>Način bola</IonLabel>
+          </IonSegmentButton>
+        </IonSegment>
+        {renderPainForm()}
+      </IonContent>
+    </IonPage>
   );
 };
 

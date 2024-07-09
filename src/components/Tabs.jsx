@@ -10,7 +10,6 @@ import {
 import { analyticsOutline, bookOutline, medkitOutline } from "ionicons/icons";
 import React from "react";
 import { AnalyticsPage, HistoryPage, PainPage, ProfilePage } from "../pages";
-import ProtectedRoute from "./ProtectedRoute";
 import { Redirect, Route } from "react-router";
 
 const Tabs = () => {

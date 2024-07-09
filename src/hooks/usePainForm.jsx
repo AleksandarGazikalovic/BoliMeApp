@@ -82,7 +82,6 @@ export const usePainForm = (initialValues = {}) => {
       //     comment: values.comment,
       //   };
       handleSubmit(values, resetForm);
-      loadPains();
       setSubmitting(false);
     },
   });
