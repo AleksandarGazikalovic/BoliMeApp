@@ -15,16 +15,22 @@ import { Field, Form, Formik } from "formik";
 import { profileService } from "../../services";
 import { useProfile } from "../../context/ProfileContext";
 import { ProfileSchema } from "../../validation/newProfileValidation";
+import { useAuth } from "../../context/AuthContext";
 
 const EditProfile = ({ profile }) => {
   const { setProfile } = useProfile();
+  const { getToken } = useAuth();
 
   const handleSubmit = async (values, { setSubmitting, setValues }) => {
     try {
-      await profileService.updateProfile(profile.profileId, {
-        ...values,
-        userId: profile.userId,
-      });
+      await profileService.updateProfile(
+        profile.profileId,
+        {
+          ...values,
+          userId: profile.userId,
+        },
+        getToken()
+      );
 
       const updatedProfile = {
         ...values,

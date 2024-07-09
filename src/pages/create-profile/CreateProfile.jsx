@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   IonContent,
   IonPage,
@@ -18,38 +18,34 @@ import {
 } from "@ionic/react";
 import "./CreateProfile.css";
 import { personAddOutline } from "ionicons/icons";
-import { auth } from "../../components/FirebaseConfig";
 import { profileService } from "../../services";
 import { Field, Form, Formik } from "formik";
 import { ProfileSchema } from "../../validation/newProfileValidation";
 import { useProfile } from "../../context/ProfileContext";
 import { useHistory } from "react-router";
+import { useAuth } from "../../context/AuthContext";
 
 const CreateProfile = () => {
-  const [userId, setUserId] = useState(null);
   const { setProfile } = useProfile();
   const [showToast, setShowToast] = useState(false);
+  const { getUserId, getToken } = useAuth();
 
   const history = useHistory();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUserId(user.uid);
-      } else {
-        setUserId(null);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      // Add a new document with a generated id to "profiles" collection
-      const docRefId = await profileService.createProfile(userId, values);
-      console.log("Document written with ID: ", docRefId);
+      const docRefId = await profileService.createProfile(
+        getUserId(),
+        values,
+        getToken()
+      );
       setShowToast(true);
-      setProfile(values);
+      setProfile(
+        Object.assign({}, values, {
+          userId: getUserId(),
+          profileId: docRefId,
+        })
+      );
       history.push("/pain");
 
       resetForm();

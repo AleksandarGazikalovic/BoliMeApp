@@ -13,7 +13,6 @@ import { personCircleOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { Field, Form, Formik } from "formik";
 import { RegistrationSchema } from "../../validation/newUserValidation";
-import { ProfileSchema } from "../../validation/newProfileValidation";
 import { useProfile } from "../../context/ProfileContext";
 import { useAuth } from "../../context/AuthContext";
 import "./Registration.css";
@@ -28,13 +27,17 @@ const RegistrationPage = () => {
 
   const handleRegister = async (values, { setSubmitting }) => {
     try {
-      await register({ email: values.email, password: values.password });
-      // const profile = await profileService.createProfile(user.uid, {
-      //   firstname: values.firstname,
-      //   lastname: values.lastname,
-      //   dateOfBirth: values.dateOfBirth,
-      // });
-      // setProfile(profile);
+      const user = await register({
+        email: values.email,
+        password: values.password,
+      });
+
+      const profile = await profileService.createProfile(user?.id, {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        dateOfBirth: values.dateOfBirth,
+      });
+      setProfile(profile);
       history.push("/login");
     } catch (error) {
       setError(resolveRegistrationErrors(error));

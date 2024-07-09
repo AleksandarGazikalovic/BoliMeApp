@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const register = useCallback(async (userData) => {
-    await axios.post(
+    const response = await axios.post(
       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${firebaseConfig.apiKey}`,
       {
         email: userData.email,
@@ -41,6 +41,17 @@ export const AuthProvider = ({ children }) => {
         returnSecureToken: true,
       }
     );
+    const expirationTime = new Date(
+      new Date().getTime() + +response.data.expiresIn * 1000
+    );
+    const loggedInUser = {
+      id: response.data.localId,
+      email: response.data.email,
+      token: response.data.idToken,
+      expirationTime,
+    };
+    setUser(loggedInUser);
+    return loggedInUser;
   }, []);
 
   const logOut = useCallback(() => {

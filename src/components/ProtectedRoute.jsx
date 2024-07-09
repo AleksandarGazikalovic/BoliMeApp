@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import PropTypes from "prop-types";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const { isUserAuthenticated } = useAuth();
@@ -20,7 +21,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 };
 
 ProtectedRoute.propTypes = {
-  component: React.Component,
+  component: PropTypes.elementType.isRequired,
 };
 
 export default ProtectedRoute;

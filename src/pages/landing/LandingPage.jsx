@@ -17,36 +17,24 @@ import {
   IonLoading,
 } from "@ionic/react";
 import "./LandingPage.css";
-import { auth } from "../../components/FirebaseConfig";
 import { useProfile } from "../../context/ProfileContext";
 import { useHistory } from "react-router";
 import { profileService } from "../../services";
 import { DefaultAvatar, Menu } from "../../components";
+import { useAuth } from "../../context/AuthContext";
 
 const LandingPage = () => {
   const [profiles, setProfiles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const history = useHistory();
   const { setProfile } = useProfile();
+  const { getUserId, getToken } = useAuth();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        profileService
-          .getProfilesByUserId(user.uid)
-          .then((data) => {
-            setProfiles(data);
-            setIsLoading(false); // Move this inside the then block
-          })
-          .catch((error) => {
-            setIsLoading(false); // Handle error state
-          });
-      } else {
-        setProfiles([]);
-        setIsLoading(false);
-      }
+    profileService.getProfilesByUserId(getUserId(), getToken()).then((data) => {
+      setProfiles(data);
+      setIsLoading(false);
     });
-    return () => unsubscribe();
   }, []);
 
   const handleProfileSelect = (profile) => {

@@ -5,6 +5,8 @@ import { getAuth } from "firebase/auth";
 export const firebaseConfig = {
   apiKey: "AIzaSyDEo7qo-x4Z6GFN9ljtR_QlH5F_Ay9QQkw",
   authDomain: "bolime-app.firebaseapp.com",
+  databaseURL:
+    "https://bolime-app-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "bolime-app",
   storageBucket: "bolime-app.appspot.com",
   messagingSenderId: "661514278322",
