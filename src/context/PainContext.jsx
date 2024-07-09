@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import painService from "../services/painService";
 import { useProfile } from "./ProfileContext";
 import PropTypes from "prop-types";
+import { useAuth } from "./AuthContext";
 
 const PainContext = createContext();
 
@@ -10,14 +11,21 @@ export const PainProvider = ({ children }) => {
   const { profile } = useProfile();
   const [pains, setPains] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { getToken } = useAuth();
 
   const loadPains = () => {
-    if (profile?.profileId) {
-      setIsLoading(true);
-      painService.getPainsByProfileId(profile.profileId).then((data) => {
-        setPains(data);
-        setIsLoading(false);
-      });
+    try {
+      if (profile?.profileId) {
+        setIsLoading(true);
+        painService
+          .getPainsByProfileId(profile.profileId, getToken())
+          .then((data) => {
+            setPains(data);
+            setIsLoading(false);
+          });
+      }
+    } catch (error) {
+      console.error("Error loading pains: ", error);
     }
   };
 

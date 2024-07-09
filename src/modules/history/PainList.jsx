@@ -17,15 +17,18 @@ import { add, createOutline, trashOutline } from "ionicons/icons";
 import { resolvePainArea, resolvePainType } from "../../utils/painUtils";
 import { useHistory } from "react-router";
 import "./PainList.css";
+import { useAuth } from "../../context/AuthContext";
 
 const PainList = ({ pains, loadPains }) => {
   const history = useHistory();
+  const { getToken } = useAuth();
+
   const handleEditClick = (pain) => {
     console.log("Edit pain", pain);
   };
 
   const handleDeleteClick = (painId) => {
-    painService.deletePain(painId).then(() => {
+    painService.deletePain(painId, getToken()).then(() => {
       loadPains();
     });
   };

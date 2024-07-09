@@ -5,12 +5,14 @@ import { PainSchema } from "../validation/newPainValidation";
 import painService from "../services/painService";
 import { useRef } from "react";
 import { usePains } from "../context/PainContext";
+import { useAuth } from "../context/AuthContext";
 
 export const usePainForm = () => {
   const { profile } = useProfile();
   const history = useHistory();
   const modal = useRef(null);
   const { loadPains } = usePains();
+  const { getToken } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -52,7 +54,8 @@ export const usePainForm = () => {
       try {
         const docRefId = await painService.createPain(
           profile.profileId,
-          values
+          values,
+          getToken()
         );
         console.log("Document written with ID: ", docRefId);
         loadPains();

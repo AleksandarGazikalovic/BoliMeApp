@@ -1,74 +1,63 @@
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
-import { firestore } from "../components/FirebaseConfig";
+import axios from "axios";
+import { firebaseConfig } from "../components/FirebaseConfig";
 
 const painService = {
-  createPain: async (profileId, painData) => {
+  createPain: async (profileId, painData, token) => {
     try {
-      console.log("painData", painData);
-      const docRef = await addDoc(collection(firestore, "pain"), {
-        profileId,
-        ...painData,
-      });
-      return docRef.id;
+      const response = await axios.post(
+        `${firebaseConfig.databaseURL}/pains.json?auth=${token}`,
+        {
+          profileId,
+          ...painData,
+        }
+      );
+      return response.data.name;
     } catch (error) {
       console.error("Error adding pain: ", error);
     }
   },
-  getPainById: async (painId) => {
+
+  getPainById: async (painId, token) => {
     try {
-      const docRef = await getDoc(doc(firestore, "pain", painId));
-      if (docRef.exists()) {
-        return docRef.data();
-      } else {
-        console.error("No such pain!");
-      }
+      const response = await axios.get(
+        `${firebaseConfig.databaseURL}/pains/${painId}.json?auth=${token}`
+      );
+      return response.data;
     } catch (error) {
       console.error("Error getting pain: ", error);
     }
   },
-  updatePain: async (painId, painData) => {
+
+  updatePain: async (painId, painData, token) => {
     try {
-      await setDoc(doc(firestore, "pain", painId), painData);
+      await axios.put(
+        `${firebaseConfig.databaseURL}/pains/${painId}.json?auth=${token}`,
+        painData
+      );
     } catch (error) {
       console.error("Error updating pain: ", error);
     }
   },
-  deletePain: async (painId) => {
+
+  deletePain: async (painId, token) => {
     try {
-      await deleteDoc(doc(firestore, "pain", painId));
+      await axios.delete(
+        `${firebaseConfig.databaseURL}/pains/${painId}.json?auth=${token}`
+      );
     } catch (error) {
       console.error("Error deleting pain: ", error);
     }
   },
 
-  getPainsByProfileId: async (profileId) => {
-    try {
-      const querySnapshot = await getDocs(
-        query(
-          collection(firestore, "pain"),
-          where("profileId", "==", profileId)
-        )
-      );
-      const pains = [];
-      console.log("querySnapshot", querySnapshot);
-      console.log("pains", pains);
-      querySnapshot.forEach((doc) => {
-        pains.push({ painId: doc.id, ...doc.data() });
-      });
-      return pains;
-    } catch (error) {
-      console.error("Error getting pains: ", error);
+  getPainsByProfileId: async (profileId, token) => {
+    const response = await axios.get(
+      `${firebaseConfig.databaseURL}/pains.json?auth=${token}&orderBy="profileId"&equalTo="${profileId}"`
+    );
+    const pains = [];
+    for (let key in response.data) {
+      pains.push({ painId: key, ...response.data[key] });
     }
+    return pains;
   },
 };
 
