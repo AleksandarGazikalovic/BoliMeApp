@@ -55,6 +55,7 @@ import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 setupIonicReact();
 
@@ -63,45 +64,18 @@ const App = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Redirect exact path="/" to="/login" />
-        <Route
-          path="/registration"
-          render={() => <RegistrationPage />}
-          exact={true}
-        />
-        <Route path="/login" render={() => <LoginPage />} exact={true} />
-        <Route
-          path="/forgotten-password"
-          render={() => <ForgottenPassword />}
-          exact={true}
-        />
-        <Route
-          path="/landing-page"
-          render={() => <LandingPage />}
-          exact={true}
-        />
-        <Route
-          path="/create-profile"
-          render={() => <CreateProfile />}
-          exact={true}
-        />
+        <Route path="/registration" component={RegistrationPage} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/forgotten-password" component={ForgottenPassword} />
+        <ProtectedRoute path="/landing-page" component={LandingPage} />
+        <ProtectedRoute path="/create-profile" component={CreateProfile} />
+
         <IonTabs>
           <IonRouterOutlet>
-            <Route
-              path="/history"
-              render={() => <HistoryPage />}
-              exact={true}
-            />
-            <Route path="/pain" render={() => <PainPage />} exact={true} />
-            <Route
-              path="/analytics"
-              render={() => <AnalyticsPage />}
-              exact={true}
-            />
-            <Route
-              path="/profile"
-              render={() => <ProfilePage />}
-              exact={true}
-            />
+            <ProtectedRoute path="/history" component={HistoryPage} />
+            <ProtectedRoute path="/pain" component={PainPage} />
+            <ProtectedRoute path="/analytics" component={AnalyticsPage} />
+            <ProtectedRoute path="/profile" component={ProfilePage} />
           </IonRouterOutlet>
 
           <IonTabBar slot="bottom">
