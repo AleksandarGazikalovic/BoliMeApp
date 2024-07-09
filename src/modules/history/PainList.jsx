@@ -8,7 +8,6 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonLoading,
   IonNavLink,
 } from "@ionic/react";
 import PropTypes from "prop-types";

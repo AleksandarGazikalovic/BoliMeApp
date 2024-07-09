@@ -23,11 +23,7 @@ const HistoryPage = () => {
 
   const renderPainForm = () => {
     if (activeSegment === "list") {
-      return (
-        <IonNav
-          root={() => <PainList pains={pains} loadPains={loadPains} />}
-        ></IonNav>
-      );
+      return <PainList pains={pains} loadPains={loadPains} />;
     } else if (activeSegment === "map") {
       return <BodyMap pains={pains} />;
     }
@@ -40,30 +36,34 @@ const HistoryPage = () => {
   return (
     <>
       <Menu />
-      <IonPage id="main-content">
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Istorija bolova</IonTitle>
-            <IonButtons slot="end">
-              <IonMenuButton />
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <IonSegment
-            value={activeSegment}
-            onIonChange={(e) => setActiveSegment(e.detail.value)}
-          >
-            <IonSegmentButton value="list">
-              <IonLabel>Istorija</IonLabel>
-            </IonSegmentButton>
-            <IonSegmentButton value="map">
-              <IonLabel>Mapa bola</IonLabel>
-            </IonSegmentButton>
-          </IonSegment>
-          {renderPainForm()}
-        </IonContent>
-      </IonPage>
+      <IonNav
+        root={() => (
+          <IonPage id="main-content">
+            <IonHeader>
+              <IonToolbar>
+                <IonTitle>Istorija bolova</IonTitle>
+                <IonButtons slot="end">
+                  <IonMenuButton />
+                </IonButtons>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent>
+              <IonSegment
+                value={activeSegment}
+                onIonChange={(e) => setActiveSegment(e.detail.value)}
+              >
+                <IonSegmentButton value="list">
+                  <IonLabel>Istorija</IonLabel>
+                </IonSegmentButton>
+                <IonSegmentButton value="map">
+                  <IonLabel>Mapa bola</IonLabel>
+                </IonSegmentButton>
+              </IonSegment>
+              {renderPainForm()}
+            </IonContent>
+          </IonPage>
+        )}
+      />
     </>
   );
 };
