@@ -134,3 +134,15 @@ export const getPathD = (id) => {
 
   return pathMap[id];
 };
+
+export const descriptions = {
+  ostar:
+    "Oštar bol - Ovo je obično oblik akutne boli, jer je često povezan sa naglim povredama ili neposrednim oštećenjem tkiva.",
+  tup: "Tup bol - Može biti i akutan i hroničan, u zavisnosti od uzroka. Na primer, tup bol koji se javlja nakon povrede je obično akutan, dok je tup bol koji je prisutan zbog hroničnih stanja kao što su artritis ili fibromijalgija hroničan.",
+  pulsirajuci:
+    "Pulsirajući bol - Ovaj tip boli može biti prisutan u oba stanja, ali je karakterističan za određene tipove akutnih bolova kao što su migrene ili akutna upalna stanja.",
+  ukocenost:
+    "Ukočenost - Ukočenost se često može pojaviti i u akutnim i u hroničnim stanjima. Na primer, nakon povrede može doći do akutne ukočenosti, dok je ukočenost koja se javlja kod hroničnih stanja poput artritisa često trajnija i može biti delom hronične boli.",
+  neuropatski:
+    "Neuropatska bol - Ova vrsta boli obično se smatra delom hronične boli, jer je često povezana sa oštećenjem nervnog sistema koje može biti trajno ili dugotrajno.",
+};

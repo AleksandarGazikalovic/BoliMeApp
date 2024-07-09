@@ -6,6 +6,7 @@ import {
   IonLabel,
   IonLoading,
   IonMenuButton,
+  IonNav,
   IonPage,
   IonSegment,
   IonSegmentButton,
@@ -22,7 +23,11 @@ const HistoryPage = () => {
 
   const renderPainForm = () => {
     if (activeSegment === "list") {
-      return <PainList pains={pains} loadPains={loadPains} />;
+      return (
+        <IonNav
+          root={() => <PainList pains={pains} loadPains={loadPains} />}
+        ></IonNav>
+      );
     } else if (activeSegment === "map") {
       return <BodyMap pains={pains} />;
     }

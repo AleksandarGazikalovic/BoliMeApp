@@ -9,19 +9,17 @@ import {
   IonLabel,
   IonList,
   IonLoading,
+  IonNavLink,
 } from "@ionic/react";
 import PropTypes from "prop-types";
 import { createOutline, trashOutline } from "ionicons/icons";
 import { resolvePainArea, resolvePainType } from "../../utils/painUtils";
 import "./PainList.css";
 import { useAuth } from "../../context/AuthContext";
+import EditPain from "./EditPain";
 
 const PainList = ({ pains, loadPains }) => {
   const { getToken } = useAuth();
-
-  const handleEditClick = (pain) => {
-    console.log("Edit pain", pain);
-  };
 
   const handleDeleteClick = (painId) => {
     painService.deletePain(painId, getToken()).then(() => {
@@ -53,13 +51,14 @@ const PainList = ({ pains, loadPains }) => {
           </IonLabel>
           {resolveChip(pain.valuePain)}
           <IonButtons slot="end">
-            <IonButton
-              fill="clear"
-              className="round-button"
-              onClick={() => handleEditClick(pain)}
+            <IonNavLink
+              routerDirection="forward"
+              component={() => <EditPain pain={pain} />}
             >
-              <IonIcon icon={createOutline} />
-            </IonButton>
+              <IonButton fill="clear" className="round-button">
+                <IonIcon icon={createOutline} />
+              </IonButton>
+            </IonNavLink>
             <IonButton
               fill="clear"
               className="round-button"
