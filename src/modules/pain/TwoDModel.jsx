@@ -5,6 +5,7 @@ import "./TwoDModel.css"; // Make sure to import your CSS file
 import Body from "../../components/Body";
 import PropTypes from "prop-types";
 import { resolvePainArea } from "../../utils/painUtils";
+import { useAuth } from "../../context/AuthContext";
 
 const TwoDModel = ({ formik, setActiveSegment }) => {
   const [rotation, setRotation] = useState(0);

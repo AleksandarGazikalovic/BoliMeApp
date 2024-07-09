@@ -1,14 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  setPersistence,
-  browserLocalPersistence,
-} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDEo7qo-x4Z6GFN9ljtR_QlH5F_Ay9QQkw",
   authDomain: "bolime-app.firebaseapp.com",
   projectId: "bolime-app",
@@ -21,25 +15,3 @@ const firebaseConfig = {
 export const firebase = initializeApp(firebaseConfig);
 export const firestore = getFirestore(firebase);
 export const auth = getAuth(firebase);
-
-export const login = async (email, password) => {
-  await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-};
-
-export const register = async (email, password) => {
-  await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-    });
-};

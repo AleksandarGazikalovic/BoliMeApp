@@ -14,6 +14,6 @@ export const ProfileSchema = Yup.object().shape({
     .integer("Broj godina mora biti ceo broj")
     .required("Obavezno polje"),
   dateOfBirth: Yup.date().required("Obavezno polje"),
-  sex: Yup.string().required("Obavezno polje"),
-  child: Yup.boolean().required("Obavezno polje"),
+  sex: Yup.string(),
+  child: Yup.boolean(),
 });

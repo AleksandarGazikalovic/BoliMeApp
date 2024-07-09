@@ -1,3 +1,4 @@
+import React from "react";
 import {
   IonContent,
   IonPage,
@@ -9,33 +10,34 @@ import {
   IonText,
 } from "@ionic/react";
 import { personCircleOutline } from "ionicons/icons";
-import "./Registration.css";
-import { register } from "../../components/FirebaseConfig";
-import React from "react";
 import { useHistory } from "react-router";
 import { Field, Form, Formik } from "formik";
-import { profileService } from "../../services";
 import { RegistrationSchema } from "../../validation/newUserValidation";
 import { ProfileSchema } from "../../validation/newProfileValidation";
 import { useProfile } from "../../context/ProfileContext";
+import { useAuth } from "../../context/AuthContext";
+import "./Registration.css";
+import { profileService } from "../../services";
+import { resolveRegistrationErrors } from "../../utils/authUtils";
 
 const RegistrationPage = () => {
   const history = useHistory();
   const { setProfile } = useProfile();
+  const { register } = useAuth();
+  const [error, setError] = React.useState(null);
 
   const handleRegister = async (values, { setSubmitting }) => {
     try {
-      const user = await register(values.email, values.password);
-      const profile = await profileService.createProfile(user.uid, {
-        firstname: values.firstname,
-        lastname: values.lastname,
-        dateOfBirth: values.dateOfBirth,
-      });
-      setProfile(profile);
-      history.push("/pain");
-      console.log("User created with ID: ", user.uid);
+      await register({ email: values.email, password: values.password });
+      // const profile = await profileService.createProfile(user.uid, {
+      //   firstname: values.firstname,
+      //   lastname: values.lastname,
+      //   dateOfBirth: values.dateOfBirth,
+      // });
+      // setProfile(profile);
+      history.push("/login");
     } catch (error) {
-      console.error("Error creating user: ", error);
+      setError(resolveRegistrationErrors(error));
     } finally {
       setSubmitting(false);
     }
@@ -59,7 +61,7 @@ const RegistrationPage = () => {
             confirmPassword: "",
           }}
           onSubmit={handleRegister}
-          validationSchema={ProfileSchema.concat(RegistrationSchema)}
+          validationSchema={RegistrationSchema}
         >
           {({ handleChange, handleBlur, values, errors, touched }) => (
             <Form className="ion-justify-content-center">
@@ -188,6 +190,12 @@ const RegistrationPage = () => {
               ) : null}
               <br />
               <br />
+              <br />
+              {error && (
+                <div className="ion-text-center">
+                  <IonText color="danger">{error}</IonText>
+                </div>
+              )}
               <IonButton
                 type="submit"
                 expand="block"

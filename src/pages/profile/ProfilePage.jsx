@@ -52,7 +52,9 @@ const ProfilePage = () => {
               <IonLabel>Izmeni profil</IonLabel>
             </IonSegmentButton>
           </IonSegment>
-          <div className="ion-padding">{renderPainForm()}</div>
+          <div className="ion-padding" style={{ height: "90%" }}>
+            {renderPainForm()}
+          </div>
         </IonContent>
       </IonPage>
     </>

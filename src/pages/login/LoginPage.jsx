@@ -20,18 +20,20 @@ import {
   IonText,
   IonToast,
 } from "@ionic/react";
-import { logInOutline, personCircleOutline } from "ionicons/icons"; // Import the specific icon
+import { logInOutline } from "ionicons/icons"; // Import the specific icon
 import "./Login.css";
 import logo from "../../assets/logo.png";
-import { auth, firebase, login } from "../../components/FirebaseConfig"; // Assuming firebaseConfig is the file where Firebase is configured
 import { Field, Form, Formik } from "formik";
 import { LoginSchema } from "../../validation/loginValidation";
+import { useAuth } from "../../context/AuthContext";
+import { resolveLoginErrors } from "../../utils/authUtils";
 
 const Login = () => {
   const [showCard, setShowCard] = useState(false);
-
-  const [buttonAnimation, setButtonAnimation] = useState(true); // State to manage button animation
+  const [error, setError] = useState(null);
+  const [, setButtonAnimation] = useState(true); // State to manage button animation
   const [showToast, setShowToast] = useState(false);
+  const { logIn } = useAuth();
 
   const toggleCard = () => {
     setShowCard(!showCard);
@@ -42,11 +44,11 @@ const Login = () => {
 
   const handleLogin = async (values, { setSubmitting }) => {
     try {
-      await login(values.email, values.password);
+      await logIn({ email: values.email, password: values.password });
       setShowToast(true);
       history.push("/landing-page");
     } catch (error) {
-      console.error("Error logging in: ", error);
+      setError(resolveLoginErrors(error));
     } finally {
       setSubmitting(false);
     }
@@ -156,6 +158,12 @@ const Login = () => {
                   >
                     Zaboravljena lozinka
                   </IonRouterLink>
+                  <br />
+                  {error && (
+                    <div className="ion-text-center">
+                      <IonText color="danger">{error}</IonText>
+                    </div>
+                  )}
                   <IonButton
                     type="submit"
                     expand="block"
