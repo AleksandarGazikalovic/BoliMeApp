@@ -46,7 +46,7 @@ const CreateProfile = () => {
           profileId: docRefId,
         })
       );
-      history.push("/pain");
+      history.push("/tabs");
 
       resetForm();
     } catch (error) {
@@ -248,9 +248,10 @@ const CreateProfile = () => {
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
-          message="Uspešno ste se napravili profil!"
+          message="Uspešno ste napravili profil!"
           duration={5000}
           color={"success"}
+          position="top"
         />
       </IonContent>
     </IonPage>

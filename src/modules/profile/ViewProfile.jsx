@@ -3,18 +3,15 @@ import { IonInput, IonItem, IonAvatar, IonButton } from "@ionic/react";
 import "./ViewProfile.css";
 import PropTypes from "prop-types";
 import { useAuth } from "../../context/AuthContext";
-import { useHistory } from "react-router";
 
 const ViewProfile = ({ profile }) => {
   const { logOut } = useAuth();
-  const history = useHistory();
   const getDefaultAvatar = () => {
     return profile.firstname.charAt(0).toUpperCase();
   };
 
   const handleLogout = () => {
     logOut();
-    history.push("/login");
   };
 
   return (
@@ -71,6 +68,7 @@ const ViewProfile = ({ profile }) => {
           color={"danger"}
           style={{ width: "50%", display: "block", margin: "0 auto" }}
           onClick={handleLogout}
+          routerLink="/login"
         >
           Odjavite se
         </IonButton>

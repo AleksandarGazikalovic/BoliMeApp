@@ -4,8 +4,6 @@ import {
   IonButton,
   IonButtons,
   IonChip,
-  IonFab,
-  IonFabButton,
   IonIcon,
   IonItem,
   IonLabel,
@@ -13,14 +11,12 @@ import {
   IonLoading,
 } from "@ionic/react";
 import PropTypes from "prop-types";
-import { add, createOutline, trashOutline } from "ionicons/icons";
+import { createOutline, trashOutline } from "ionicons/icons";
 import { resolvePainArea, resolvePainType } from "../../utils/painUtils";
-import { useHistory } from "react-router";
 import "./PainList.css";
 import { useAuth } from "../../context/AuthContext";
 
 const PainList = ({ pains, loadPains }) => {
-  const history = useHistory();
   const { getToken } = useAuth();
 
   const handleEditClick = (pain) => {
@@ -48,45 +44,38 @@ const PainList = ({ pains, loadPains }) => {
   };
 
   return (
-    <>
-      <IonList inset={true}>
-        {pains?.map((pain) => (
-          <IonItem key={pain.painId}>
-            <IonLabel>
-              <h2>{resolvePainArea(pain.painArea)}</h2>
-              <p>{resolvePainType(pain.selectedOptionPain)}</p>
-            </IonLabel>
-            {resolveChip(pain.valuePain)}
-            <IonButtons slot="end">
-              <IonButton
-                fill="clear"
-                className="round-button"
-                onClick={() => handleEditClick(pain)}
-              >
-                <IonIcon icon={createOutline} />
-              </IonButton>
-              <IonButton
-                fill="clear"
-                className="round-button"
-                onClick={() => handleDeleteClick(pain.painId)}
-              >
-                <IonIcon icon={trashOutline} />
-              </IonButton>
-            </IonButtons>
-          </IonItem>
-        ))}
-        {pains.length === 0 && (
-          <div className="ion-text-center ion-padding">
-            <h2>Nemate zabeleženih bolova</h2>
-          </div>
-        )}
-      </IonList>
-      <IonFab slot="fixed" vertical="bottom" horizontal="end">
-        <IonFabButton>
-          <IonIcon icon={add} onClick={() => history.push("/pain/")}></IonIcon>
-        </IonFabButton>
-      </IonFab>
-    </>
+    <IonList inset={true}>
+      {pains?.map((pain) => (
+        <IonItem key={pain.painId}>
+          <IonLabel>
+            <h2>{resolvePainArea(pain.painArea)}</h2>
+            <p>{resolvePainType(pain.selectedOptionPain)}</p>
+          </IonLabel>
+          {resolveChip(pain.valuePain)}
+          <IonButtons slot="end">
+            <IonButton
+              fill="clear"
+              className="round-button"
+              onClick={() => handleEditClick(pain)}
+            >
+              <IonIcon icon={createOutline} />
+            </IonButton>
+            <IonButton
+              fill="clear"
+              className="round-button"
+              onClick={() => handleDeleteClick(pain.painId)}
+            >
+              <IonIcon icon={trashOutline} />
+            </IonButton>
+          </IonButtons>
+        </IonItem>
+      ))}
+      {pains.length === 0 && (
+        <div className="ion-text-center ion-padding">
+          <h2>Nemate zabeleženih bolova</h2>
+        </div>
+      )}
+    </IonList>
   );
 };
 

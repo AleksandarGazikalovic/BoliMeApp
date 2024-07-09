@@ -59,6 +59,7 @@ const ForgottenPassword = () => {
           message={toastMessage}
           duration={3000}
           onDidDismiss={() => setShowToast(false)}
+          position="top"
         />
       </IonContent>
     </IonPage>

@@ -1,31 +1,15 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import {
-  IonApp,
-  IonAvatar,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-  setupIonicReact,
-} from "@ionic/react";
+import { IonApp, IonRouterOutlet, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
 import {
-  AnalyticsPage,
-  ProfilePage,
-  PainPage,
   LoginPage,
   RegistrationPage,
-  HistoryPage,
   CreateProfile,
   ForgottenPassword,
   LandingPage,
 } from "./pages";
-
-import { analyticsOutline, bookOutline, medkitOutline } from "ionicons/icons";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -56,6 +40,7 @@ import "@ionic/react/css/palettes/dark.system.css";
 /* Theme variables */
 import "./theme/variables.css";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Tabs from "./components/Tabs";
 
 setupIonicReact();
 
@@ -64,41 +49,24 @@ const App = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Redirect exact path="/" to="/login" />
-        <Route path="/registration" component={RegistrationPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/forgotten-password" component={ForgottenPassword} />
-        <ProtectedRoute path="/landing-page" component={LandingPage} />
-        <ProtectedRoute path="/create-profile" component={CreateProfile} />
-
-        <IonTabs>
-          <IonRouterOutlet>
-            <ProtectedRoute path="/history" component={HistoryPage} />
-            <ProtectedRoute path="/pain" component={PainPage} />
-            <ProtectedRoute path="/analytics" component={AnalyticsPage} />
-            <ProtectedRoute path="/profile" component={ProfilePage} />
-          </IonRouterOutlet>
-
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="history" href="/history">
-              <IonIcon icon={bookOutline} />
-              <IonLabel>Istorija</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="pain" href="/pain">
-              <IonIcon icon={medkitOutline} />
-              <IonLabel>Dodaj bol</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="analytics" href="/analytics">
-              <IonIcon icon={analyticsOutline} />
-              <IonLabel>Analitika</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="profile" href="/profile">
-              <IonAvatar style={{ width: "30px", height: "30px" }}>
-                <img src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </IonAvatar>
-              <IonLabel>Profil</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <Route path="/registration" exact>
+          <RegistrationPage />
+        </Route>
+        <Route path="/login" exact>
+          <LoginPage />
+        </Route>
+        <Route path="/forgotten-password" exact>
+          <ForgottenPassword />
+        </Route>
+        <ProtectedRoute path="/landing-page" exact>
+          <LandingPage />
+        </ProtectedRoute>
+        <ProtectedRoute path="/create-profile" exact>
+          <CreateProfile />
+        </ProtectedRoute>
+        <ProtectedRoute path="/tabs">
+          <Tabs />
+        </ProtectedRoute>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

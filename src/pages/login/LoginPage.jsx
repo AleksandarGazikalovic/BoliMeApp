@@ -198,6 +198,7 @@ const Login = () => {
           message="Uspešno ste se prijavili!"
           duration={5000}
           color={"success"}
+          position="top"
         />
       </IonContent>
     </IonPage>

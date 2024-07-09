@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonContent,
   IonPage,
@@ -8,6 +8,7 @@ import {
   IonInput,
   IonInputPasswordToggle,
   IonText,
+  IonToast,
 } from "@ionic/react";
 import { personCircleOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
@@ -23,7 +24,8 @@ const RegistrationPage = () => {
   const history = useHistory();
   const { setProfile } = useProfile();
   const { register } = useAuth();
-  const [error, setError] = React.useState(null);
+  const [error, setError] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   const handleRegister = async (values, { setSubmitting }) => {
     try {
@@ -210,6 +212,14 @@ const RegistrationPage = () => {
             </Form>
           )}
         </Formik>
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Uspešno ste napravili profil!"
+          duration={5000}
+          color={"success"}
+          position="top"
+        />
       </IonContent>
     </IonPage>
   );

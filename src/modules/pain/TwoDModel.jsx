@@ -5,14 +5,11 @@ import "./TwoDModel.css"; // Make sure to import your CSS file
 import Body from "../../components/Body";
 import PropTypes from "prop-types";
 import { resolvePainArea } from "../../utils/painUtils";
-import { useAuth } from "../../context/AuthContext";
-import { useProfile } from "../../context/ProfileContext";
 
 const TwoDModel = ({ formik, setActiveSegment }) => {
   const [rotation, setRotation] = useState(0);
   const [isPrimary, setIsPrimary] = useState(false);
-  const { profile } = useProfile();
-  console.log(profile);
+
   const handleRotation = () => {
     if (isPrimary) return;
     setRotation((prevRotation) => prevRotation + 180);

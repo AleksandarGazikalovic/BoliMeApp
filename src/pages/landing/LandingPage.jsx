@@ -40,7 +40,7 @@ const LandingPage = () => {
   const handleProfileSelect = (profile) => {
     console.log(`Selected profile ID: ${profile.profileId}`);
     setProfile(profile);
-    history.push(`/pain`);
+    history.push(`/tabs`);
     // Add logic to handle profile selection, e.g., navigating to a different page or setting a state
   };
 

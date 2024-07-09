@@ -3,25 +3,18 @@ import { Route, Redirect } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import PropTypes from "prop-types";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+const ProtectedRoute = ({ children, ...rest }) => {
   const { isUserAuthenticated } = useAuth();
 
   return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isUserAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/login" />
-        )
-      }
-    />
+    <Route {...rest}>
+      {isUserAuthenticated ? children : <Redirect to="/login" />}
+    </Route>
   );
 };
 
 ProtectedRoute.propTypes = {
-  component: PropTypes.elementType.isRequired,
+  children: PropTypes.node,
 };
 
 export default ProtectedRoute;

@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import { useProfile } from "../context/ProfileContext";
-import { useHistory } from "react-router";
 import { PainSchema } from "../validation/newPainValidation";
 import painService from "../services/painService";
 import { useRef } from "react";
@@ -9,7 +8,6 @@ import { useAuth } from "../context/AuthContext";
 
 export const usePainForm = () => {
   const { profile } = useProfile();
-  const history = useHistory();
   const modal = useRef(null);
   const { loadPains } = usePains();
   const { getToken } = useAuth();
@@ -59,7 +57,6 @@ export const usePainForm = () => {
         );
         console.log("Document written with ID: ", docRefId);
         loadPains();
-        history.push("/history");
         resetForm();
       } catch (error) {
         console.error("Error adding document: ", error);
