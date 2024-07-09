@@ -11,28 +11,28 @@ import { analyticsOutline, bookOutline, medkitOutline } from "ionicons/icons";
 import React from "react";
 import { AnalyticsPage, HistoryPage, PainPage, ProfilePage } from "../pages";
 import ProtectedRoute from "./ProtectedRoute";
-import { Redirect } from "react-router";
+import { Redirect, Route } from "react-router";
 
 const Tabs = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
         <Redirect exact path="/tabs" to="/tabs/history" />
-        <ProtectedRoute path="/tabs/history" exact>
+        <Route path="/tabs/history" exact>
           <HistoryPage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/tabs/pain">
+        </Route>
+        <Route exact path="/tabs/pain">
           <PainPage />
-        </ProtectedRoute>
-        <ProtectedRoute path="/tabs/analytics" exact>
+        </Route>
+        <Route path="/tabs/analytics" exact>
           <AnalyticsPage />
-        </ProtectedRoute>
-        <ProtectedRoute path="/tabs/profile" exact>
+        </Route>
+        <Route path="/tabs/profile" exact>
           <ProfilePage />
-        </ProtectedRoute>
-        <ProtectedRoute exact path="/tabs">
+        </Route>
+        <Route exact path="/tabs">
           <Redirect to="/tabs/history" />
-        </ProtectedRoute>
+        </Route>
       </IonRouterOutlet>
 
       <IonTabBar slot="bottom">

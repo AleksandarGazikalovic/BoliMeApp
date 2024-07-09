@@ -37,7 +37,7 @@ export const usePainForm = (initialValues = {}) => {
         console.log("Document written with ID: ", docRefId);
         resetForm();
         loadPains();
-        history.replace("/tabs/history");
+        history.replace("/tabs/");
       } catch (error) {
         console.error("Error creating pain: ", error);
       }

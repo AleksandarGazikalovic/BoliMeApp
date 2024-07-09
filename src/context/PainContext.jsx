@@ -22,10 +22,19 @@ export const PainProvider = ({ children }) => {
           .then((data) => {
             setPains(data);
             setIsLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error loading pains: ", error);
+          })
+          .finally(() => {
+            setIsLoading(false);
           });
       }
     } catch (error) {
       console.error("Error loading pains: ", error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   };
 

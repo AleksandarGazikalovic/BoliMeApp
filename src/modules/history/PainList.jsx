@@ -27,10 +27,6 @@ const PainList = ({ pains, loadPains }) => {
     });
   };
 
-  if (!pains) {
-    return <IonLoading isOpen={true} />;
-  }
-
   const resolveChip = (value) => {
     if (value > 8) {
       return <IonChip color="danger">{"Jacina bola " + value}</IonChip>;
